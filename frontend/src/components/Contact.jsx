@@ -3,7 +3,8 @@ import axios from 'axios';
 import { Send, User, Store, Mail, Phone, MessageSquare, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { packs, engagements } from '../data/mock';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = '/api';
+
 const API = `${BACKEND_URL}/api`;
 
 const Field = ({ icon: Icon, children, error }) => (
