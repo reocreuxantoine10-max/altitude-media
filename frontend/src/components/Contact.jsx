@@ -5,7 +5,7 @@ import { packs, engagements } from '../data/mock';
 
 const API = '/api';
 
-const API = `${BACKEND_URL}/api`;
+
 
 const Field = ({ icon: Icon, children, error }) => (
   <div>
