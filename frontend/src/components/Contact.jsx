@@ -154,24 +154,28 @@ const Contact = () => {
           <form onSubmit={onSubmit} noValidate className="bg-white rounded-3xl p-7 md:p-9 shadow-xl border border-neutral-100 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Field icon={User} error={errors.name}>
-                <input value={form.name} onChange={update('name')} className={inputCls} placeholder="Votre nom *" />
+                <input aria-label="Votre nom" value={form.name} onChange={update('name')} className={inputCls} placeholder="Votre nom *" />
               </Field>
               <Field icon={Store}>
-                <input value={form.restaurant} onChange={update('restaurant')} className={inputCls} placeholder="Nom du restaurant" />
+                <input aria-label="Nom du restaurant ou du commerce" value={form.restaurant} onChange={update('restaurant')} className={inputCls} placeholder="Nom du restaurant" />
               </Field>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Field icon={Mail} error={errors.email}>
-                <input type="email" value={form.email} onChange={update('email')} className={inputCls} placeholder="Email *" />
+                <input aria-label="Adresse email" type="email" value={form.email} onChange={update('email')} className={inputCls} placeholder="Email *" />
               </Field>
               <Field icon={Phone}>
-                <input value={form.phone} onChange={update('phone')} className={inputCls} placeholder="Téléphone" />
+                <input aria-label="Numéro de téléphone" value={form.phone} onChange={update('phone')} className={inputCls} placeholder="Téléphone" />
               </Field>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Field>
-                <select value={form.pack} onChange={update('pack')} className={inputColored}>
-                  <option value="">Pack qui vous intéresse</option>
+                <select aria-label="Pack souhaité" value={form.pack} onChange={update('pack')} className={inputColored}>
+                  <option value="">Solution qui vous intéresse</option>
+                  <option value="Plaque NFC — comptoir 40 €">Plaque NFC — comptoir 40 €</option>
+                  <option value="Plaque NFC — murale 30 €">Plaque NFC — murale 30 €</option>
+                  <option value="Plaque NFC — table 30 €">Plaque NFC — table 30 €</option>
+                  <option value="Fidélité digitale">Fidélité digitale</option>
                   {packs.map((p) => (
                     <option key={p.id} value={p.name}>{p.name} — {p.price}€</option>
                   ))}
@@ -179,7 +183,7 @@ const Contact = () => {
                 </select>
               </Field>
               <Field>
-                <select value={form.engagement} onChange={update('engagement')} className={inputColored}>
+                <select aria-label="Durée d’engagement souhaitée" value={form.engagement} onChange={update('engagement')} className={inputColored}>
                   <option value="">Durée d'engagement</option>
                   {engagements.map((e) => (
                     <option key={e.months} value={`${e.months} mois`}>{e.months} mois</option>
@@ -188,7 +192,7 @@ const Contact = () => {
               </Field>
             </div>
             <Field error={errors.message}>
-              <textarea value={form.message} onChange={update('message')} rows={4} className={`${inputColored} resize-none`} placeholder="Parlez-nous de votre projet, vos objectifs, votre restaurant... *" />
+              <textarea aria-label="Votre message" value={form.message} onChange={update('message')} rows={4} className={`${inputColored} resize-none`} placeholder="Parlez-nous de votre projet, vos objectifs, votre restaurant... *" />
             </Field>
 
             {status === 'success' && (

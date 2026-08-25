@@ -36,11 +36,11 @@ const Footer = () => {
             Prêt à faire grandir
             <br />
             <span className="italic font-serif" style={{ fontFamily: '"Playfair Display", serif', fontWeight: 500 }}>
-              votre restaurant ?
+              votre commerce ?
             </span>
           </h2>
           <p className="mt-6 text-[16px] text-neutral-700 max-w-lg mx-auto leading-relaxed">
-            Confiez votre communication à Altitude Media et concentrez-vous sur ce que vous faites de mieux : offrir une expérience unique à vos clients.
+            Plaques NFC, fidélité digitale ou accompagnement : choisissez la solution adaptée à votre prochain objectif.
           </p>
           <button
             onClick={() => scrollTo('contact')}
@@ -55,7 +55,7 @@ const Footer = () => {
             <div className="md:col-span-1">
               <Logo size="md" />
               <p className="mt-5 text-[14px] text-neutral-600 leading-relaxed max-w-[280px]">
-                Nous faisons grandir les restaurants grâce à une communication qui attire plus de clients.
+                Des solutions concrètes pour la visibilité, la fidélité et la communication des commerces locaux.
               </p>
               <a
                 href="mailto:contact@altitudemedia.fr"

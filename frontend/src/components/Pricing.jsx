@@ -77,12 +77,12 @@ const Pricing = () => {
       <div className={`max-w-7xl mx-auto px-6 reveal ${visible ? 'visible' : ''}`}>
         <div className="text-center mb-14">
           <span className="inline-block px-4 py-1.5 rounded-full bg-neutral-100 text-[13px] font-medium text-neutral-700 mb-5">
-            Nos abonnements
+            Accompagnement & abonnements
           </span>
           <h2 className="text-[46px] md:text-[64px] font-black tracking-[-0.03em] text-neutral-900 leading-[0.95]">
-            Des offres adaptées
+            Déléguez votre communication
             <br />
-            <span className="italic font-serif" style={{ fontFamily: '"Playfair Display", serif', fontWeight: 500 }}>à vos besoins
+            <span className="italic font-serif" style={{ fontFamily: '"Playfair Display", serif', fontWeight: 500 }}>avec le bon niveau d’accompagnement
             </span>
           </h2>
           <p className="mt-5 text-[15px] text-neutral-600">
