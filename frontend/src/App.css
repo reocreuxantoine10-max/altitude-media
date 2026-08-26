@@ -426,7 +426,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* Product gallery polish and real assembled-to-exploded transition */
 .variant-options button img{width:38px;height:38px;object-fit:contain;border-radius:9px;background:#fff}.variant-options button{border-radius:14px;padding:6px 12px 6px 6px;min-height:52px;transition:border-color .2s,transform .2s,box-shadow .2s}.variant-options button:hover{transform:translateY(-2px)}
-.product-transformation{--tech-progress:0;height:240vh;background:linear-gradient(180deg,#fff,#f6f9f9 55%,#fff)}
+.product-transformation{--tech-progress:0;--frames-opacity:0;height:240vh;background:linear-gradient(180deg,#fff,#f6f9f9 55%,#fff)}
 .product-transformation .exploded-sticky{grid-template-columns:.8fr 1.2fr}
 .transformation-stage{position:relative;min-height:680px;display:grid;place-items:center;isolation:isolate;perspective:1200px}
 .transformation-image{position:absolute;width:min(560px,48vw);height:min(72vh,690px);object-fit:contain;filter:drop-shadow(0 24px 28px rgba(0,52,71,.1));will-change:opacity,transform,filter}
@@ -437,3 +437,28 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media(max-width:900px){.product-transformation .exploded-sticky{grid-template-columns:1fr}.transformation-stage{min-height:520px}.transformation-image{width:min(620px,88vw);height:48vh}.tech-note--one{left:8%;top:31%}.tech-note--two{right:7%;bottom:20%}}
 @media(max-width:600px){.selector-preview{background:#fff}.selector-preview>img{width:95%;height:350px;filter:drop-shadow(0 15px 16px rgba(0,52,71,.1))}.selector-shadow{display:none}.variant-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.variant-options button{justify-content:flex-start}.product-transformation{height:210vh}.product-transformation .exploded-sticky{padding-top:82px}.transformation-stage{min-height:430px}.transformation-image{width:94vw;height:44vh}.tech-note{font-size:8px;padding:7px 9px}.tech-note--one{left:2%;top:27%}.tech-note--two{right:2%;bottom:17%}}
 @media(prefers-reduced-motion:reduce){.product-transformation{height:auto;min-height:900px}.product-transformation .exploded-sticky{position:relative}.transformation-image--assembled{display:none}.transformation-image--exploded{opacity:1;transform:none;filter:drop-shadow(0 24px 28px rgba(0,52,71,.1))}.tech-note{opacity:1;transform:none}}
+
+/* Photorealistic mountain passage */
+.mountain-scene--photo{background:#dce8eb}
+.selector-preview{background:#fff}.selector-preview>img{filter:drop-shadow(0 18px 18px rgba(0,52,71,.12))}.selector-shadow{opacity:.25}
+.mountain-photo,.mountain-photo-depth{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;object-position:center;will-change:transform,opacity}
+.mountain-photo--rear{transform:translate3d(0,calc(var(--journey) * 5vh),0) scale(calc(1 + var(--journey) * .16));filter:saturate(.82) contrast(1.04)}
+.mountain-photo-depth{overflow:hidden}.mountain-photo-depth>img{width:100%;height:100%;object-fit:cover;object-position:center}
+.mountain-photo-depth--mid{opacity:.28;transform:translate3d(0,calc(var(--journey) * 10vh),0) scale(calc(1 + var(--journey) * .28));filter:contrast(1.1) saturate(.72);mask-image:linear-gradient(to top,#000 0,rgba(0,0,0,.75) 42%,transparent 76%)}
+.mountain-photo-depth--left{transform-origin:left center;transform:translate3d(calc(var(--journey) * -38vw),calc(var(--journey) * 7vh),0) scale(calc(1 + var(--journey) * .46));filter:contrast(1.12) brightness(.72);mask-image:linear-gradient(90deg,#000 0,#000 15%,transparent 48%)}
+.mountain-photo-depth--right{transform-origin:right center;transform:translate3d(calc(var(--journey) * 38vw),calc(var(--journey) * 7vh),0) scale(calc(1 + var(--journey) * .46));filter:contrast(1.12) brightness(.76);mask-image:linear-gradient(270deg,#000 0,#000 15%,transparent 48%)}
+.mountain-photo-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(238,247,249,.52),rgba(238,247,249,.03) 42%,rgba(0,40,53,.16));opacity:calc(1 - var(--journey) * .5)}
+.mountain-scene--photo .mountain-mist{background:linear-gradient(90deg,transparent,rgba(239,248,249,.7),transparent);filter:blur(20px)}
+
+/* Multi-stage separation using real regions from the supplied exploded image */
+.exploded-frames{position:absolute;width:min(610px,52vw);height:min(72vh,690px);z-index:2;filter:drop-shadow(0 22px 26px rgba(0,52,71,.08));opacity:var(--frames-opacity)}
+.exploded-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;will-change:transform,opacity}
+.exploded-frame--support{clip-path:polygon(0 0,34% 0,34% 100%,0 100%);transform:translate3d(calc((1 - var(--tech-progress)) * 125px),0,0)}
+.exploded-frame--antenna{clip-path:polygon(22% 0,53% 0,53% 100%,22% 100%);transform:translate3d(calc((1 - var(--tech-progress)) * 76px),0,0)}
+.exploded-frame--substrate{clip-path:polygon(43% 0,73% 0,73% 100%,43% 100%);transform:translate3d(calc((1 - var(--tech-progress)) * 20px),0,0)}
+.exploded-frame--face{clip-path:polygon(64% 0,100% 0,100% 100%,64% 100%);transform:translate3d(calc((1 - var(--tech-progress)) * -105px),0,0)}
+.product-transformation .transformation-image--assembled{opacity:clamp(0,calc((.56 - var(--tech-progress)) * 3.6),1);filter:blur(calc(var(--tech-progress) * 1px)) drop-shadow(0 24px 28px rgba(0,52,71,.1))}
+.product-transformation .transformation-image--exploded{z-index:3;opacity:clamp(0,calc((var(--tech-progress) - .72) * 5),1);transform:none;filter:drop-shadow(0 24px 28px rgba(0,52,71,.1))}
+@media(max-width:900px){.exploded-frames{width:min(650px,94vw);height:48vh}.mountain-photo,.mountain-photo-depth{inset:-2% -22%;width:144%;height:104%}}
+@media(max-width:600px){.exploded-frames{width:98vw;height:44vh}.journey-opening{background:linear-gradient(180deg,rgba(240,248,249,.3),rgba(240,248,249,.08))}}
+@media(prefers-reduced-motion:reduce){.mountain-photo,.mountain-photo-depth{transform:none!important}.mountain-photo-depth--left,.mountain-photo-depth--right{opacity:.65}.exploded-frames{display:none}}
