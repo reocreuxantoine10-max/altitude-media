@@ -24,7 +24,7 @@ const ProductSelector = () => {
       <div className="selector-shell">
         <div className="selector-preview">
           <span className="reference-badge">Référence produit</span>
-          <img key={variant.image} src={variant.image} alt={`${product.name}, finition ${variant.label}`} />
+          <img key={variant.image} src={variant.image} width={variant.width} height={variant.height} loading="lazy" decoding="async" alt={`${product.name}, finition ${variant.label}`} />
           <div className="selector-shadow" />
         </div>
         <div className="selector-controls">
@@ -33,7 +33,7 @@ const ProductSelector = () => {
             {nfcProducts.map((item) => <button key={item.id} className={item.id === productId ? 'active' : ''} onClick={() => chooseProduct(item.id)}><span>{item.name}</span><small>{item.price} €</small>{item.id === productId && <Check />}</button>)}
           </div></div>
           <div className="control-group"><span>2. Style</span><div className="variant-options">
-            {product.variants.map((item) => <button key={item.id} className={item.id === variant.id ? 'active' : ''} onClick={() => setVariantId(item.id)} aria-label={`Finition ${item.label}`}><i style={{ background: item.color }} />{item.label}</button>)}
+            {product.variants.map((item) => <button key={item.id} className={item.id === variant.id ? 'active' : ''} onClick={() => setVariantId(item.id)} aria-label={`Finition ${item.label}`}><img src={item.image} width="48" height="48" loading="lazy" alt="" />{item.label}</button>)}
           </div></div>
           <p className="selector-note">Une plaque adaptée à votre établissement. De nouvelles références pourront être ajoutées facilement.</p>
           <button className="primary-cta" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Choisir ma plaque <ArrowRight /></button>

@@ -21,7 +21,7 @@ const NFCProducts = () => (
       </div>
       <div className="nfc-focus__visual">
         <div className="product-halo" />
-        <img src={counterPlate.variants[1].image} alt="Plaque NFC de comptoir noire pour avis Google" />
+        <img src={counterPlate.variants[1].image} width={counterPlate.variants[1].width} height={counterPlate.variants[1].height} loading="lazy" decoding="async" alt="Plaque NFC de comptoir noire pour avis Google" />
         <span className="floating-tag floating-tag--price"><small>{counterPlate.name}</small><strong>{counterPlate.price} €</strong></span>
         <span className="floating-tag floating-tag--nfc"><Nfc /> NFC + QR</span>
       </div>
