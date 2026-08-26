@@ -3,8 +3,8 @@ import { ArrowRight, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
 const links = [
-  { label: 'Avis Google', target: 'nfc' }, { label: 'Fidélité', target: 'fidelite' },
-  { label: 'Communication', target: 'prix' }, { label: 'Contact', target: 'contact' },
+  { label: 'Plaques NFC', target: 'nfc' }, { label: 'Modèles', target: 'modeles' },
+  { label: 'Fonctionnement', target: 'fonctionnement' }, { label: 'Communication', target: 'prix' },
 ];
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -21,7 +21,7 @@ const Navbar = () => {
         <button className="brand-button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Retour en haut"><Logo size="sm" /></button>
         <div className={`nav-links ${open ? 'is-open' : ''}`}>
           {links.map((link) => <button key={link.target} onClick={() => go(link.target)}>{link.label}</button>)}
-          <button className="nav-cta" onClick={() => go('contact')}>Parler de mon projet <ArrowRight /></button>
+          <button className="nav-cta" onClick={() => go('contact')}>Commander <ArrowRight /></button>
         </div>
         <button className="menu-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}>{open ? <X /> : <Menu />}</button>
       </nav>

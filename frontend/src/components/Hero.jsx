@@ -1,36 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowDown, ArrowRight, MapPin, Nfc, Star } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { ArrowDown, MapPin, Nfc } from 'lucide-react';
 import MountainLayers from './MountainLayers';
+import Logo from './Logo';
 
 const Hero = () => {
-  const [progress, setProgress] = useState(0);
+  const sectionRef = useRef(null);
+
   useEffect(() => {
     let frame;
-    const onScroll = () => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => setProgress(Math.min(window.scrollY / Math.max(window.innerHeight, 1), 1)));
+    const update = () => {
+      if (!sectionRef.current) return;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const distance = sectionRef.current.offsetHeight - window.innerHeight;
+      const progress = reduced ? 1 : Math.min(1, Math.max(0, -sectionRef.current.getBoundingClientRect().top / Math.max(distance, 1)));
+      sectionRef.current.style.setProperty('--journey', progress.toFixed(4));
     };
+    const onScroll = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); };
+    update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', onScroll); };
+    window.addEventListener('resize', onScroll);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
   }, []);
-  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
   return (
-    <section className="hero-premium">
-      <div className="hero-aurora" />
-      <MountainLayers progress={progress} />
-      <div className="hero-copy" style={{ transform: `translate3d(0, ${progress * -28}px, 0)`, opacity: 1 - progress * 0.3 }}>
-        <span className="hero-kicker"><MapPin /> Lyon & Ouest Lyonnais <i /> Solutions pour commerces locaux</span>
-        <h1>Faites revenir vos clients.<br /><em>Faites-les parler de vous.</em></h1>
-        <p>Avis Google, fidélité digitale et communication pour les commerces locaux.</p>
-        <div className="hero-actions">
-          <button className="primary-cta" onClick={() => scrollTo('solutions')}>Découvrir les solutions <ArrowRight /></button>
-          <button className="secondary-cta" onClick={() => scrollTo('nfc')}><Nfc /> Voir les plaques NFC</button>
+    <section ref={sectionRef} className="mountain-journey" aria-label="Introduction Altitude Media">
+      <div className="mountain-sticky">
+        <MountainLayers />
+        <div className="journey-opening">
+          <span className="hero-kicker"><MapPin /> Lyon & Ouest Lyonnais</span>
+          <h1>Plus d’avis Google.<br /><em>En un geste.</em></h1>
+          <p>Des plaques NFC simples et élégantes pour les commerces locaux.</p>
+          <span className="journey-scroll"><ArrowDown /> Faites défiler pour traverser</span>
         </div>
-        <div className="hero-proof"><span><Star fill="currentColor" /> Avis Google</span><span><Nfc /> NFC + QR code</span><span>Sans abonnement obligatoire</span></div>
+        <div className="brand-reveal">
+          <div className="brand-reveal__logo"><Logo size="lg" /></div>
+          <p>Votre visibilité prend de l’altitude.</p>
+          <button onClick={() => document.getElementById('nfc')?.scrollIntoView({ behavior: 'smooth' })}>Découvrir les plaques <Nfc /></button>
+        </div>
       </div>
-      <button className="scroll-cue" onClick={() => scrollTo('solutions')} aria-label="Découvrir les solutions"><span>Découvrir</span><ArrowDown /></button>
     </section>
   );
 };
+
 export default Hero;

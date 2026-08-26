@@ -40,7 +40,7 @@ const Footer = () => {
             </span>
           </h2>
           <p className="mt-6 text-[16px] text-neutral-700 max-w-lg mx-auto leading-relaxed">
-            Plaques NFC, fidélité digitale ou accompagnement : choisissez la solution adaptée à votre prochain objectif.
+            Plaques NFC ou accompagnement en communication : choisissez la solution adaptée à votre prochain objectif.
           </p>
           <button
             onClick={() => scrollTo('contact')}
@@ -55,7 +55,7 @@ const Footer = () => {
             <div className="md:col-span-1">
               <Logo size="md" />
               <p className="mt-5 text-[14px] text-neutral-600 leading-relaxed max-w-[280px]">
-                Des solutions concrètes pour la visibilité, la fidélité et la communication des commerces locaux.
+                Des solutions concrètes pour la visibilité et la communication des commerces locaux.
               </p>
               <a
                 href="mailto:contact@altitudemedia.fr"

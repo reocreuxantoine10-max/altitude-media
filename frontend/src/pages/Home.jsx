@@ -1,10 +1,10 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import SolutionPath from '../components/SolutionPath';
 import NFCProducts from '../components/NFCProducts';
-import Loyalty from '../components/Loyalty';
-import FutureAI from '../components/FutureAI';
+import ProductSelector from '../components/ProductSelector';
+import ExplodedPlate from '../components/ExplodedPlate';
+import HowItWorks from '../components/HowItWorks';
 import Stats from '../components/Stats';
 import Levers from '../components/Levers';
 import Process from '../components/Process';
@@ -19,16 +19,16 @@ const Home = () => {
     <div className="relative">
       <Navbar />
       <Hero />
-      <SolutionPath />
       <NFCProducts />
-      <Loyalty />
+      <ProductSelector />
+      <ExplodedPlate />
+      <HowItWorks />
       <Stats />
       <Levers />
       <Process />
       <Pricing />
       <PriceConfigurator />
       <FAQ />
-      <FutureAI />
       <Contact />
       <Footer />
     </div>

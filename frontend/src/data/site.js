@@ -1,14 +1,35 @@
 export const nfcProducts = [
-  { id: 'counter', name: 'Plaque comptoir', price: 40, format: 'À poser près de la caisse' },
-  { id: 'wall', name: 'Plaque murale', price: 30, format: 'Visible sur un mur ou une vitrine' },
-  { id: 'table', name: 'Plaque table', price: 30, format: 'Au plus près de l’expérience client' },
-];
-
-export const solutionPaths = [
-  { number: '01', eyebrow: 'Avis Google', title: 'Obtenir plus d’avis', text: 'Une plaque NFC, sans abonnement obligatoire.', target: 'nfc' },
-  { number: '02', eyebrow: 'Fidélité digitale', title: 'Faire revenir vos clients', text: 'Une carte de fidélité virtuelle, proposée séparément.', target: 'fidelite' },
-  { number: '03', eyebrow: 'Communication', title: 'Déléguer votre visibilité', text: 'Un accompagnement mensuel adapté à vos besoins.', target: 'prix' },
-  { number: '04', eyebrow: 'Solution complète', title: 'Combiner les leviers', text: 'Avis, fidélité et communication dans un parcours cohérent.', target: 'contact' },
+  {
+    id: 'counter',
+    name: 'Plaque comptoir',
+    price: 40,
+    format: 'À poser près de la caisse',
+    variants: [
+      { id: 'white', label: 'Blanc', color: '#f4f4f0', image: '/products/plaque-comptoir/white/google-white-reference.png' },
+      { id: 'black', label: 'Noir', color: '#121718', image: '/products/plaque-comptoir/black/google-black-reference.png' },
+    ],
+  },
+  {
+    id: 'wall',
+    name: 'Plaque murale',
+    price: 30,
+    format: 'Visible sur un mur ou une vitrine',
+    variants: [
+      { id: 'blue', label: 'Bleu', color: '#2860dc', image: '/products/plaque-murale/blue/google-blue-reference.png' },
+      { id: 'black', label: 'Noir', color: '#101314', image: '/products/plaque-murale/black/google-black-reference.png' },
+      { id: 'instagram', label: 'Instagram', color: '#c33a86', image: '/products/plaque-murale/instagram/instagram-gradient-reference.png' },
+    ],
+  },
+  {
+    id: 'table',
+    name: 'Plaque table',
+    price: 30,
+    format: 'Au plus près de l’expérience client',
+    variants: [
+      { id: 'white', label: 'Blanc', color: '#f4f4f0', image: '/products/plaque-murale/blue/google-blue-reference.png' },
+      { id: 'black', label: 'Noir', color: '#101314', image: '/products/plaque-murale/black/google-black-reference.png' },
+    ],
+  },
 ];
 
 export const siteContact = {

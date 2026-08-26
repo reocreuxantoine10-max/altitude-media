@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Send, User, Store, Mail, Phone, MessageSquare, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { packs, engagements } from '../data/mock';
+import { nfcProducts } from '../data/site';
 
 const API = '/api';
 
@@ -172,10 +173,10 @@ const Contact = () => {
               <Field>
                 <select aria-label="Pack souhaité" value={form.pack} onChange={update('pack')} className={inputColored}>
                   <option value="">Solution qui vous intéresse</option>
-                  <option value="Plaque NFC — comptoir 40 €">Plaque NFC — comptoir 40 €</option>
-                  <option value="Plaque NFC — murale 30 €">Plaque NFC — murale 30 €</option>
-                  <option value="Plaque NFC — table 30 €">Plaque NFC — table 30 €</option>
-                  <option value="Fidélité digitale">Fidélité digitale</option>
+                  {nfcProducts.map((product) => {
+                    const label = `${product.name} — ${product.price} €`;
+                    return <option key={product.id} value={label}>{label}</option>;
+                  })}
                   {packs.map((p) => (
                     <option key={p.id} value={p.name}>{p.name} — {p.price}€</option>
                   ))}
