@@ -40,7 +40,7 @@ export const packs = [
     name: 'Pack Croissance',
     price: 349,
     recommended: true,
-    tagline: 'Le restaurant nous délègue entièrement sa communication.',
+    tagline: 'Pour déléguer entièrement votre communication.',
     features: [
       { icon: 'Check', text: 'Tous les avantages des Packs Essentiel' },
       { icon: 'Video', text: '+3 vidéos courtes supplémentaires' },
@@ -58,7 +58,7 @@ export const packs = [
     color: 'amber',
     name: 'Pack Premium',
     price: 599,
-    tagline: 'Pour les restaurants qui veulent aller plus loin.',
+    tagline: 'Pour les commerces qui veulent aller plus loin.',
     features: [
       { icon: 'Check', text: 'Tout le Pack Croissance' },
       { icon: 'Clapperboard', text: 'Séances de tournage à la demande' },
@@ -72,7 +72,7 @@ export const packs = [
 ];
 
 export const launchIncludes = [
-  'Audit complet du restaurant',
+  'Audit complet de votre commerce',
   'Optimisation de la fiche Google Business',
   'Installation de la plaque NFC + QR Code',
   'Première séance photo / vidéo',
@@ -81,7 +81,7 @@ export const launchIncludes = [
 ];
 
 export const options = [
-  { icon: 'Globe2', title: 'Site internet', price: 'à partir de 350 €', desc: 'Site vitrine sur-mesure pour votre restaurant.' },
+  { icon: 'Globe2', title: 'Site internet', price: 'à partir de 350 €', desc: 'Site vitrine sur-mesure pour votre commerce.' },
   { icon: 'PartyPopper', title: "Couverture d'un événement", price: '250 à 500 €', desc: 'Hors pack premium. Reportage photo/vidéo dédié.' },
   { icon: 'Nfc', title: 'Plaque NFC supplémentaire', price: '19 €', desc: 'Boîtier connecté pour capter plus d’avis Google.' },
 ];
@@ -96,18 +96,18 @@ export const levers = [
   {
     id: 1,
     title: 'Gagnez des avis',
-    subtitle: 'Un boîtier connecté qui facilite les avis clients sur votre restaurant.',
+    subtitle: 'Un outil connecté qui facilite les interactions avec vos clients.',
     theme: 'light',
     span: 'sm',
     visual: 'nfc',
   },
   {
     id: 2,
-    title: 'Sublimez vos plats',
-    subtitle: 'Des photos et vidéos professionnelles qui donnent envie de réserver.',
+    title: 'Valorisez votre savoir-faire',
+    subtitle: 'Des photos et vidéos professionnelles qui donnent envie de vous choisir.',
     theme: 'light',
     span: 'sm',
-    visual: 'food',
+    visual: 'creative',
   },
   {
     id: 3,
@@ -217,7 +217,7 @@ export const faqs = [
     a: "Absolument. Tous les contenus produits (photos, vidéos, montages) deviennent votre propriété. Vous pouvez les réutiliser librement pour votre menu, vos supports print ou toute autre communication.",
   },
   {
-    q: 'À quelle fréquence venez-vous au restaurant ?',
+    q: 'À quelle fréquence vous déplacez-vous dans mon commerce ?',
     a: "Une séance photo/vidéo est incluse chaque mois dans tous nos packs. Sur le Pack Premium, nous nous déplaçons également à la demande pour couvrir vos événements ou créer du contenu spécifique.",
   },
 ];

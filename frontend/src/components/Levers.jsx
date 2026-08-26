@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { QrCode, Camera, MapPin, Instagram, Mountain } from 'lucide-react';
+import { QrCode, Camera, MapPin, Instagram, Mountain, Aperture, Play } from 'lucide-react';
 import { images, levers } from '../data/mock';
 
 const NfcVisual = () => (
@@ -81,14 +81,11 @@ const PhoneVisual = () => (
   </div>
 );
 
-const FoodVisual = () => (
-  <div className="relative w-full h-full min-h-[280px] overflow-hidden rounded-b-3xl">
-    <img src={images.food} alt="Restaurant plating" className="absolute inset-0 w-full h-full object-cover" />
-    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full bg-gradient-to-br from-neutral-800 to-neutral-950 shadow-2xl flex items-center justify-center">
-      <div className="w-16 h-16 rounded-full bg-neutral-900 border-2 border-neutral-700 flex items-center justify-center">
-        <Camera className="w-7 h-7 text-neutral-300" />
-      </div>
-    </div>
+const CreativeVisual = () => (
+  <div className="creative-visual" aria-hidden="true">
+    <div className="creative-frame creative-frame--one"><Camera /></div>
+    <div className="creative-frame creative-frame--two"><Play /></div>
+    <div className="creative-orbit"><Aperture /></div>
   </div>
 );
 
@@ -120,7 +117,7 @@ const LeverCard = ({ item }) => {
       ? 'md:col-span-2'
       : '';
 
-  const visualMap = { nfc: NfcVisual, food: FoodVisual, peak: PeakVisual, phone: PhoneVisual, map: MapVisual };
+  const visualMap = { nfc: NfcVisual, creative: CreativeVisual, peak: PeakVisual, phone: PhoneVisual, map: MapVisual };
   const Visual = visualMap[item.visual];
 
   return (

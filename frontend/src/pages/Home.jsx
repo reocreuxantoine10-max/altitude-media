@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import VisibilityIntro from '../components/VisibilityIntro';
 import NFCProducts from '../components/NFCProducts';
 import ProductSelector from '../components/ProductSelector';
 import ExplodedPlate from '../components/ExplodedPlate';
@@ -19,6 +20,7 @@ const Home = () => {
     <div className="relative">
       <Navbar />
       <Hero />
+      <VisibilityIntro />
       <NFCProducts />
       <ProductSelector />
       <ExplodedPlate />

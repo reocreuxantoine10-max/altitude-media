@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Instagram, Linkedin, Facebook, Mail } from 'lucide-react';
+import { Instagram, Mail, Phone } from 'lucide-react';
 import Logo from './Logo';
 import { images } from '../data/mock';
 import { MentionsLegalesModal, CGVModal, PrivacyModal } from './LegalModals';
@@ -66,6 +66,7 @@ const Footer = () => {
                   <Mail className="w-3.5 h-3.5 text-neutral-900" />
                 </span>
               </a>
+              <a href="tel:+33668593384" className="footer-phone"><Phone /> 06 68 59 33 84</a>
             </div>
 
             <div>
@@ -137,20 +138,6 @@ const Footer = () => {
                 className="w-9 h-9 rounded-full bg-neutral-100 hover:bg-gradient-to-br hover:from-pink-500 hover:via-purple-500 hover:to-orange-400 flex items-center justify-center transition-all group"
               >
                 <Instagram className="w-4 h-4 text-neutral-700 group-hover:text-white transition-colors" />
-              </a>
-              <a
-                href="#"
-                aria-label="LinkedIn"
-                className="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-900 flex items-center justify-center transition-colors group"
-              >
-                <Linkedin className="w-4 h-4 text-neutral-700 group-hover:text-white transition-colors" />
-              </a>
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-900 flex items-center justify-center transition-colors group"
-              >
-                <Facebook className="w-4 h-4 text-neutral-700 group-hover:text-white transition-colors" />
               </a>
             </div>
           </div>

@@ -10,8 +10,8 @@ const NFCProducts = () => (
     <div className="section-grid">
       <div className="nfc-focus__copy">
         <span className="eyebrow"><Nfc /> Le produit Altitude Media</span>
-        <h2 className="display-title">Transformez vos clients satisfaits<br /><em>en avis Google.</em></h2>
-        <p className="section-lead">Le client approche son smartphone ou scanne le QR code. Il arrive directement sur la page permettant de laisser un avis Google.</p>
+        <h2 className="display-title">Un geste simple entre vos clients<br /><em>et votre commerce.</em></h2>
+        <p className="section-lead">Le client approche son smartphone ou scanne le QR code. Selon le modèle choisi, il accède directement à Google, à vos réseaux sociaux ou à la destination utile.</p>
         <ul className="feature-checks">
           <li><Check /> Achat possible sans abonnement</li>
           <li><Check /> NFC et QR code réunis</li>

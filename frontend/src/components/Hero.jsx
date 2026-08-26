@@ -28,14 +28,17 @@ const Hero = () => {
         <MountainLayers />
         <div className="journey-opening">
           <span className="hero-kicker"><MapPin /> Lyon & Ouest Lyonnais</span>
-          <h1>Plus d’avis Google.<br /><em>En un geste.</em></h1>
-          <p>Des plaques NFC simples et élégantes pour les commerces locaux.</p>
+          <h1>Donnez plus de visibilité<br /><em>à votre commerce.</em></h1>
+          <p>Plaques NFC, présence Google, réseaux sociaux et accompagnement digital pour les commerces locaux.</p>
           <span className="journey-scroll"><ArrowDown /> Faites défiler pour traverser</span>
         </div>
         <div className="brand-reveal">
           <div className="brand-reveal__logo"><Logo size="lg" /></div>
-          <p>Votre visibilité prend de l’altitude.</p>
-          <button onClick={() => document.getElementById('nfc')?.scrollIntoView({ behavior: 'smooth' })}>Découvrir les plaques <Nfc /></button>
+          <p>Deux solutions, une même ambition : faire grandir votre visibilité.</p>
+          <div className="brand-reveal__actions">
+            <button onClick={() => document.getElementById('nfc')?.scrollIntoView({ behavior: 'smooth' })}>Découvrir les plaques <Nfc /></button>
+            <button className="brand-reveal__secondary" onClick={() => document.getElementById('prix')?.scrollIntoView({ behavior: 'smooth' })}>Voir l’accompagnement</button>
+          </div>
         </div>
       </div>
     </section>

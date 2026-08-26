@@ -62,7 +62,7 @@ const Contact = () => {
       `Je vous contacte via le site altitudemedia.fr :`,
       ``,
       `Nom : ${data.name}`,
-      `Restaurant : ${data.restaurant || '—'}`,
+      `Commerce : ${data.restaurant || '—'}`,
       `Email : ${data.email}`,
       `Téléphone : ${data.phone || '—'}`,
       `Pack qui m'intéresse : ${data.pack || '—'}`,
@@ -110,7 +110,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 bg-neutral-50">
+    <section id="contact" className="contact-premium relative py-24 md:py-32 bg-neutral-50">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
           {/* LEFT */}
@@ -119,15 +119,29 @@ const Contact = () => {
               Contact
             </span>
             <h2 className="text-[46px] md:text-[58px] font-black tracking-[-0.03em] text-neutral-900 leading-[0.95]">
-              Parlons de votre
+              Faisons grandir
               <br />
-              <span className="italic font-serif" style={{ fontFamily: '"Playfair Display", serif', fontWeight: 500 }}>restaurant</span>
+              <span className="italic font-serif" style={{ fontFamily: '"Playfair Display", serif', fontWeight: 500 }}>votre visibilité</span>
             </h2>
             <p className="mt-6 text-[15.5px] text-neutral-700 leading-relaxed max-w-md">
-              Décrivez-nous votre projet en quelques mots. Nous revenons vers vous sous 24h avec une proposition adaptée à vos besoins.
+              Pour commander une plaque, choisir votre accompagnement ou simplement poser une question, échangeons sur votre projet.
             </p>
 
+            <div className="contact-actions">
+              <a href="tel:+33668593384" className="primary-cta"><Phone /> Nous appeler</a>
+              <a href="mailto:contact@altitudemedia.fr" className="secondary-cta"><Mail /> Nous écrire</a>
+            </div>
+
             <div className="mt-10 space-y-4">
+              <div className="flex items-center gap-4">
+                <span className="w-11 h-11 rounded-2xl bg-neutral-100 flex items-center justify-center">
+                  <Phone className="w-4.5 h-4.5" />
+                </span>
+                <div>
+                  <div className="text-[12px] text-neutral-500">Téléphone</div>
+                  <a href="tel:+33668593384" className="text-[15px] font-semibold text-neutral-900">06 68 59 33 84</a>
+                </div>
+              </div>
               <div className="flex items-center gap-4">
                 <span className="w-11 h-11 rounded-2xl bg-indigo-100 flex items-center justify-center">
                   <Mail className="w-4.5 h-4.5 text-indigo-600" />
@@ -158,7 +172,7 @@ const Contact = () => {
                 <input aria-label="Votre nom" value={form.name} onChange={update('name')} className={inputCls} placeholder="Votre nom *" />
               </Field>
               <Field icon={Store}>
-                <input aria-label="Nom du restaurant ou du commerce" value={form.restaurant} onChange={update('restaurant')} className={inputCls} placeholder="Nom du restaurant" />
+                <input aria-label="Nom du commerce" value={form.restaurant} onChange={update('restaurant')} className={inputCls} placeholder="Nom du commerce" />
               </Field>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -193,7 +207,7 @@ const Contact = () => {
               </Field>
             </div>
             <Field error={errors.message}>
-              <textarea aria-label="Votre message" value={form.message} onChange={update('message')} rows={4} className={`${inputColored} resize-none`} placeholder="Parlez-nous de votre projet, vos objectifs, votre restaurant... *" />
+              <textarea aria-label="Votre message" value={form.message} onChange={update('message')} rows={4} className={`${inputColored} resize-none`} placeholder="Parlez-nous de votre commerce, de votre projet et de vos objectifs... *" />
             </Field>
 
             {status === 'success' && (
