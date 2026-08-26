@@ -453,10 +453,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 /* Multi-stage separation using real regions from the supplied exploded image */
 .exploded-frames{position:absolute;width:min(610px,52vw);height:min(72vh,690px);z-index:2;filter:drop-shadow(0 22px 26px rgba(0,52,71,.08));opacity:var(--frames-opacity)}
 .exploded-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;will-change:transform,opacity}
-.exploded-frame--support{clip-path:polygon(0 0,34% 0,34% 100%,0 100%);transform:translate3d(calc((1 - var(--tech-progress)) * 125px),0,0)}
-.exploded-frame--antenna{clip-path:polygon(22% 0,53% 0,53% 100%,22% 100%);transform:translate3d(calc((1 - var(--tech-progress)) * 76px),0,0)}
-.exploded-frame--substrate{clip-path:polygon(43% 0,73% 0,73% 100%,43% 100%);transform:translate3d(calc((1 - var(--tech-progress)) * 20px),0,0)}
-.exploded-frame--face{clip-path:polygon(64% 0,100% 0,100% 100%,64% 100%);transform:translate3d(calc((1 - var(--tech-progress)) * -105px),0,0)}
+.exploded-frame--support{clip-path:polygon(0 0,27% 0,27% 100%,0 100%);transform:translate3d(calc((1 - var(--tech-progress)) * 125px),0,0)}
+.exploded-frame--antenna{clip-path:polygon(27% 0,50% 0,50% 100%,27% 100%);transform:translate3d(calc((1 - var(--tech-progress)) * 76px),0,0)}
+.exploded-frame--substrate{clip-path:polygon(50% 0,68% 0,68% 100%,50% 100%);transform:translate3d(calc((1 - var(--tech-progress)) * 20px),0,0)}
+.exploded-frame--face{clip-path:polygon(68% 0,100% 0,100% 100%,68% 100%);transform:translate3d(calc((1 - var(--tech-progress)) * -105px),0,0)}
 .product-transformation .transformation-image--assembled{opacity:clamp(0,calc((.56 - var(--tech-progress)) * 3.6),1);filter:blur(calc(var(--tech-progress) * 1px)) drop-shadow(0 24px 28px rgba(0,52,71,.1))}
 .product-transformation .transformation-image--exploded{z-index:3;opacity:clamp(0,calc((var(--tech-progress) - .72) * 5),1);transform:none;filter:drop-shadow(0 24px 28px rgba(0,52,71,.1))}
 @media(max-width:900px){.exploded-frames{width:min(650px,94vw);height:48vh}.mountain-photo,.mountain-photo-depth{inset:-2% -22%;width:144%;height:104%}}
@@ -531,3 +531,43 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 @media(max-width:900px){.pillar-grid{grid-template-columns:1fr}.pillar-card{min-height:390px}.visibility-intro__head br{display:none}}
 @media(max-width:600px){.brand-reveal__actions{display:grid;width:100%;max-width:320px}.brand-reveal__actions button{justify-content:center}.pillar-card{padding:27px;min-height:385px}.visibility-intro__head>p{font-size:16px}.pricing-transition{border-radius:20px}.contact-actions{display:grid}.contact-actions a{width:100%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Immersive motion and supplied high-definition assets */
+.mountain-camera{position:absolute;inset:-3%;transform:translate3d(0,calc(var(--journey) * 5vh),0) scale(calc(1 + var(--journey) * .11)) rotate(calc((var(--journey) - .5) * -.25deg));transform-origin:50% 58%;will-change:transform}
+.mountain-camera .mountain-photo,.mountain-camera .mountain-photo-depth{inset:0;width:100%;height:100%}
+.mountain-photo--rear{transform:translate3d(0,calc(var(--journey) * 7vh),0) scale(calc(1 + var(--journey) * .19))}
+.mountain-photo-depth--mid{transform:translate3d(0,calc(var(--journey) * 14vh),0) scale(calc(1 + var(--journey) * .35));opacity:calc(.32 - var(--journey) * .12)}
+.mountain-photo-depth--left{transform:translate3d(calc(var(--journey) * -46vw),calc(var(--journey) * 11vh),0) scale(calc(1 + var(--journey) * .58));mask-image:linear-gradient(90deg,#000 0,#000 23%,transparent 55%)}
+.mountain-photo-depth--right{transform:translate3d(calc(var(--journey) * 46vw),calc(var(--journey) * 11vh),0) scale(calc(1 + var(--journey) * .58));mask-image:linear-gradient(270deg,#000 0,#000 23%,transparent 55%)}
+.mountain-photo-scrim{background:linear-gradient(180deg,rgba(233,243,246,.38),rgba(255,255,255,.02) 45%,rgba(0,42,57,.3));opacity:calc(.88 - var(--journey) * .42)}
+.mountain-scene--photo:after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,31,43,.3) 108%);opacity:calc(.62 - var(--journey) * .25)}
+.mountain-mist--one{animation:mistDrift 11s ease-in-out infinite alternate}.mountain-mist--two{animation:mistDrift 15s ease-in-out infinite alternate-reverse}
+@keyframes mistDrift{from{margin-left:-2vw}to{margin-left:3vw}}
+
+main>section:not(.mountain-journey){--section-reveal:0}
+main>section:not(.mountain-journey)>.section-heading,
+main>section:not(.mountain-journey)>.visibility-intro__head,
+main>section:not(.mountain-journey)>div>.section-heading,
+main>section:not(.mountain-journey)>div>div:first-child{opacity:var(--section-reveal);transform:translate3d(0,calc((1 - var(--section-reveal)) * 24px),0);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+main>section.section-in-view{--section-reveal:1}
+.pillar-card,.pack-card,.step-card,.model-card{transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s ease,border-color .3s ease}
+.pillar-card:hover,.pack-card:hover,.step-card:hover,.model-card:hover{transform:translateY(-7px);box-shadow:0 30px 75px rgba(0,52,71,.16)}
+.primary-cta svg,.pack-cta svg,.pillar-card button svg{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.primary-cta:hover svg,.pack-cta:hover svg,.pillar-card button:hover svg{transform:translateX(4px)}
+
+.product-transformation{--plate-opening:0;--internal-reveal:0;--plate-settle:0}
+.product-transformation .transformation-image--assembled{opacity:clamp(0,calc((.55 - var(--plate-opening)) * 2),1);transform:translate3d(calc(var(--plate-opening) * -24px),calc(var(--plate-opening) * 4px),0) scale(calc(1 - var(--plate-opening) * .025)) rotate(calc(var(--plate-opening) * -1deg));filter:blur(calc(var(--plate-opening) * .7px)) drop-shadow(0 24px 28px rgba(0,52,71,.1))}
+.exploded-frames{opacity:calc(var(--frames-opacity) * (1 - var(--plate-settle) * .7));transform:scale(calc(.97 + var(--internal-reveal) * .03));will-change:transform,opacity}
+.exploded-frame--support{transform:translate3d(calc((1 - var(--plate-opening)) * 150px),calc((1 - var(--plate-opening)) * -6px),0) rotate(calc((1 - var(--plate-opening)) * 2deg))}
+.exploded-frame--antenna{transform:translate3d(calc((1 - var(--internal-reveal)) * 98px),calc((1 - var(--internal-reveal)) * 3px),0)}
+.exploded-frame--substrate{transform:translate3d(calc((1 - var(--internal-reveal)) * 34px),0,0)}
+.exploded-frame--face{transform:translate3d(calc((1 - var(--plate-opening)) * -132px),calc((1 - var(--plate-opening)) * 5px),0) rotate(calc((1 - var(--plate-opening)) * -1.5deg))}
+.product-transformation .transformation-image--exploded{opacity:clamp(0,calc(var(--plate-settle) * 2.2),1);transform:translate3d(calc((1 - var(--plate-settle)) * 12px),0,0) scale(calc(.985 + var(--plate-settle) * .015))}
+
+.included-plate-callout{position:relative;max-width:980px;margin:0 auto 28px;padding:24px 28px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px;border:1px solid rgba(0,74,99,.14);border-radius:24px;background:rgba(255,255,255,.82);box-shadow:0 18px 55px rgba(0,52,71,.08);backdrop-filter:blur(14px)}
+.included-plate-callout__icon{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;background:var(--brand);color:#fff}.included-plate-callout__icon svg{width:25px}
+.included-plate-callout small{color:var(--brand);font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.included-plate-callout h3{margin:4px 0 5px;font-size:21px;letter-spacing:-.025em}.included-plate-callout p{margin:0;color:var(--text-muted);font-size:13px;line-height:1.5}.included-plate-callout__arrow{width:20px;color:var(--brand)}
+
+@media(max-width:900px){.mountain-camera{inset:-2% -22%}.mountain-camera .mountain-photo,.mountain-camera .mountain-photo-depth{inset:0;width:100%;height:100%}}
+@media(max-width:600px){.mountain-camera{inset:-1% -45%;transform:translate3d(0,calc(var(--journey) * 3vh),0) scale(calc(1 + var(--journey) * .07))}.mountain-photo-depth--left{transform:translate3d(calc(var(--journey) * -58vw),calc(var(--journey) * 7vh),0) scale(calc(1 + var(--journey) * .36))}.mountain-photo-depth--right{transform:translate3d(calc(var(--journey) * 58vw),calc(var(--journey) * 7vh),0) scale(calc(1 + var(--journey) * .36))}.included-plate-callout{grid-template-columns:auto 1fr;padding:20px}.included-plate-callout__arrow{display:none}.included-plate-callout h3{font-size:18px}.included-plate-callout p{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){main>section:not(.mountain-journey){--section-reveal:1}.mountain-camera{transform:none!important}.mountain-mist{animation:none!important}.exploded-frames{display:none}.product-transformation .transformation-image--exploded{opacity:1;transform:none}}

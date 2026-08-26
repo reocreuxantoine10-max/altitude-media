@@ -92,6 +92,16 @@ const Pricing = () => {
           </p>
         </div>
 
+        <div className="included-plate-callout">
+          <span className="included-plate-callout__icon"><LucideIcons.Nfc /></span>
+          <div>
+            <small>Une solution complète</small>
+            <h3>La plaque NFC est aussi intégrée à l’accompagnement.</h3>
+            <p>Vous pouvez acheter une plaque seule, ou la retrouver dans la mise en place prévue avec votre abonnement.</p>
+          </div>
+          <LucideIcons.ArrowDown className="included-plate-callout__arrow" />
+        </div>
+
         {/* Launch fees card */}
         <div className="launch-card mb-8 max-w-4xl mx-auto rounded-3xl text-white p-8 md:p-10 shadow-2xl relative overflow-hidden">
           <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-indigo-600/20 blur-3xl" />
