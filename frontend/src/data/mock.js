@@ -40,7 +40,7 @@ export const packs = [
     name: 'Pack Croissance',
     price: 349,
     recommended: true,
-    tagline: 'Le restaurant nous délègue entièrement sa communication.',
+    tagline: 'Pour déléguer entièrement votre communication.',
     features: [
       { icon: 'Check', text: 'Tous les avantages des Packs Essentiel' },
       { icon: 'Video', text: '+3 vidéos courtes supplémentaires' },
@@ -58,7 +58,7 @@ export const packs = [
     color: 'amber',
     name: 'Pack Premium',
     price: 599,
-    tagline: 'Pour les restaurants qui veulent aller plus loin.',
+    tagline: 'Pour les commerces qui veulent aller plus loin.',
     features: [
       { icon: 'Check', text: 'Tout le Pack Croissance' },
       { icon: 'Clapperboard', text: 'Séances de tournage à la demande' },
@@ -72,7 +72,7 @@ export const packs = [
 ];
 
 export const launchIncludes = [
-  'Audit complet du restaurant',
+  'Audit complet de votre commerce',
   'Optimisation de la fiche Google Business',
   'Installation de la plaque NFC + QR Code',
   'Première séance photo / vidéo',
@@ -81,7 +81,7 @@ export const launchIncludes = [
 ];
 
 export const options = [
-  { icon: 'Globe2', title: 'Site internet', price: 'à partir de 350 €', desc: 'Site vitrine sur-mesure pour votre restaurant.' },
+  { icon: 'Globe2', title: 'Site internet', price: 'à partir de 350 €', desc: 'Site vitrine sur-mesure pour votre commerce.' },
   { icon: 'PartyPopper', title: "Couverture d'un événement", price: '250 à 500 €', desc: 'Hors pack premium. Reportage photo/vidéo dédié.' },
   { icon: 'Nfc', title: 'Plaque NFC supplémentaire', price: '19 €', desc: 'Boîtier connecté pour capter plus d’avis Google.' },
 ];
@@ -96,18 +96,18 @@ export const levers = [
   {
     id: 1,
     title: 'Gagnez des avis',
-    subtitle: 'Un boîtier connecté qui facilite les avis clients sur votre restaurant.',
+    subtitle: 'Un outil connecté qui facilite les interactions avec vos clients.',
     theme: 'light',
     span: 'sm',
     visual: 'nfc',
   },
   {
     id: 2,
-    title: 'Sublimez vos plats',
-    subtitle: 'Des photos et vidéos professionnelles qui donnent envie de réserver.',
+    title: 'Valorisez votre savoir-faire',
+    subtitle: 'Des photos et vidéos professionnelles qui donnent envie de vous choisir.',
     theme: 'light',
     span: 'sm',
-    visual: 'food',
+    visual: 'creative',
   },
   {
     id: 3,
@@ -153,7 +153,7 @@ export const testimonials = [
     id: 1,
     name: 'Marc Delaunay',
     role: 'Chef & propriétaire',
-    restaurant: 'La Table du Marché',
+    commerce: 'La Table du Marché',
     city: 'Lyon 6ᵉ',
     quote: "Depuis qu'Altitude Media gère nos réseaux, on a doublé les réservations du week-end. La plaque NFC nous a fait exploser les avis Google — on est passés de 4,2 à 4,8 étoiles en 3 mois.",
     rating: 5,
@@ -164,7 +164,7 @@ export const testimonials = [
     id: 2,
     name: 'Sophie Bernard',
     role: 'Gérante',
-    restaurant: 'Bistro Constance',
+    commerce: 'Bistro Constance',
     city: 'Bordeaux',
     quote: 'On n\'a plus à se soucier de nos publications. Les photos sont sublimes, le contenu Instagram est cohérent et notre fiche Google est toujours à jour. Un vrai gain de temps.',
     rating: 5,
@@ -175,7 +175,7 @@ export const testimonials = [
     id: 3,
     name: 'Julien Rossi',
     role: 'Chef',
-    restaurant: 'Trattoria del Sole',
+    commerce: 'Trattoria del Sole',
     city: 'Nice',
     quote: "L'équipe est disponible, réactive et vraiment à l'écoute. Les vidéos qu'ils produisent chaque mois donnent une image premium à notre trattoria. On recommande à 100%.",
     rating: 5,
@@ -186,7 +186,7 @@ export const testimonials = [
     id: 4,
     name: 'Camille Fontaine',
     role: 'Cheffe pâtissière',
-    restaurant: 'L\'Atelier Sucré',
+    commerce: 'L\'Atelier Sucré',
     city: 'Paris 11ᵉ',
     quote: "Le Pack Croissance a transformé notre visibilité. +43% de trafic sur notre fiche Google en 4 mois et une communauté Instagram qui grandit chaque semaine.",
     rating: 5,
@@ -217,15 +217,11 @@ export const faqs = [
     a: "Absolument. Tous les contenus produits (photos, vidéos, montages) deviennent votre propriété. Vous pouvez les réutiliser librement pour votre menu, vos supports print ou toute autre communication.",
   },
   {
-    q: 'À quelle fréquence venez-vous au restaurant ?',
+    q: 'À quelle fréquence vous déplacez-vous dans mon commerce ?',
     a: "Une séance photo/vidéo est incluse chaque mois dans tous nos packs. Sur le Pack Premium, nous nous déplaçons également à la demande pour couvrir vos événements ou créer du contenu spécifique.",
   },
 ];
 
 export const images = {
-  hero: 'https://images.unsplash.com/photo-1713142465087-c2775fa37b91?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHwzfHxtb3VudGFpbiUyMHBlYWtzJTIwc25vd3xlbnwwfHx8YmxhY2tfYW5kX3doaXRlfDE3ODYxMzEyOTR8MA&ixlib=rb-4.1.0&q=85',
-  food: 'https://images.unsplash.com/photo-1663530761401-15eefb544889?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwZm9vZCUyMHBsYXRpbmd8ZW58MHx8fHwxNzg2MTMxMjk0fDA&ixlib=rb-4.1.0&q=85',
-  camera: 'https://images.unsplash.com/photo-1580707221190-bd94d9087b7f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBjYW1lcmF8ZW58MHx8fHwxNzg2MTMxMjk0fDA&ixlib=rb-4.1.0&q=85',
-  phone: 'https://images.unsplash.com/photo-1724862936518-ae7fcfc052c1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTZ8MHwxfHNlYXJjaHwxfHxzbWFydHBob25lJTIwc29jaWFsJTIwbWVkaWF8ZW58MHx8fHwxNzg2MTMxMzAwfDA&ixlib=rb-4.1.0&q=85',
-  footer: 'https://images.unsplash.com/photo-1661167490531-d035e4c9345d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwyfHxjbG91ZHklMjBtb3VudGFpbnxlbnwwfHx8fDE3ODYxMzEzMDB8MA&ixlib=rb-4.1.0&q=85',
+  footer: '/mountains/hero-alpine-pass.webp',
 };

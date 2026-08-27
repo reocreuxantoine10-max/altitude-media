@@ -142,7 +142,7 @@ const PriceConfigurator = () => {
                   }}
                   className="mt-6 w-full py-3.5 rounded-full bg-white text-neutral-900 font-semibold text-[15px] hover:bg-neutral-100 transition-colors"
                 >
-                  Demander un devis détaillé
+                  Nous contacter
                 </button>
               </div>
             </div>

@@ -78,7 +78,7 @@ async def get_status_checks():
 # ============ CONTACT FORM ============
 class ContactRequest(BaseModel):
     name: str = Field(..., min_length=1, max_length=120)
-    restaurant: Optional[str] = Field(None, max_length=180)
+    commerce: Optional[str] = Field(None, max_length=180)
     email: EmailStr
     phone: Optional[str] = Field(None, max_length=40)
     pack: Optional[str] = Field(None, max_length=60)
@@ -90,7 +90,7 @@ class ContactRecord(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
-    restaurant: Optional[str] = None
+    commerce: Optional[str] = None
     email: str
     phone: Optional[str] = None
     pack: Optional[str] = None
@@ -113,7 +113,7 @@ async def forward_via_formsubmit(payload: dict) -> bool:
         subject = f"Nouvelle demande Altitude Media \u2014 {payload.get('name', 'Client')}"
         body_lines = [
             f"Nom: {payload.get('name', '')}",
-            f"Restaurant: {payload.get('restaurant') or '-'}",
+            f"Commerce: {payload.get('commerce') or '-'}",
             f"Email: {payload.get('email', '')}",
             f"T\u00e9l\u00e9phone: {payload.get('phone') or '-'}",
             f"Pack int\u00e9ress\u00e9: {payload.get('pack') or '-'}",
@@ -129,7 +129,7 @@ async def forward_via_formsubmit(payload: dict) -> bool:
             "_replyto": payload.get("email", ""),
             "_template": "table",
             "message": "\n".join(body_lines),
-            "Restaurant": payload.get("restaurant") or "-",
+            "Commerce": payload.get("commerce") or "-",
             "Telephone": payload.get("phone") or "-",
             "Pack": payload.get("pack") or "-",
             "Engagement": payload.get("engagement") or "-",

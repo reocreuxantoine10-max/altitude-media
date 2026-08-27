@@ -1,7 +1,7 @@
 import React from 'react';
 
-const LOGO_HORIZ = 'https://customer-assets-eiarnc6j.emergentagent.net/job_restaurant-comms-pro/artifacts/x9bpu5mn_LOGO%20TXT%20DROITE.webp';
-const LOGO_MARK = 'https://customer-assets-eiarnc6j.emergentagent.net/job_restaurant-comms-pro/artifacts/hsjrsum3_LOGO%20SANS%20TEXTE.webp';
+const LOGO_HORIZ = '/brand/altitude-media-horizontal.webp';
+const LOGO_MARK = '/brand/altitude-media-mark.webp';
 
 const Logo = ({ size = 'md', variant = 'horizontal' }) => {
   const h = size === 'lg' ? 44 : size === 'sm' ? 28 : 34;
@@ -11,6 +11,8 @@ const Logo = ({ size = 'md', variant = 'horizontal' }) => {
       <img
         src={src}
         alt="Altitude Media"
+        width={variant === 'mark' ? 2000 : 600}
+        height={variant === 'mark' ? 2000 : 221}
         style={{ height: h, width: 'auto', display: 'block' }}
         draggable={false}
       />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Send, User, Store, Mail, Phone, MessageSquare, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { packs, engagements } from '../data/mock';
+import { nfcProducts } from '../data/site';
 
 const API = '/api';
 
@@ -27,7 +27,7 @@ const inputColored = 'w-full bg-transparent py-3.5 px-4 text-[14.5px] text-neutr
 const Contact = () => {
   const [form, setForm] = useState({
     name: '',
-    restaurant: '',
+    commerce: '',
     email: '',
     phone: '',
     pack: '',
@@ -54,14 +54,14 @@ const Contact = () => {
   };
 
   const buildMailto = (data) => {
-    const subject = `Nouvelle demande — ${data.name}${data.restaurant ? ' (' + data.restaurant + ')' : ''}`;
+    const subject = `Nouvelle demande — ${data.name}${data.commerce ? ' (' + data.commerce + ')' : ''}`;
     const bodyLines = [
       `Bonjour Altitude Media,`,
       ``,
       `Je vous contacte via le site altitudemedia.fr :`,
       ``,
       `Nom : ${data.name}`,
-      `Restaurant : ${data.restaurant || '—'}`,
+      `Commerce : ${data.commerce || '—'}`,
       `Email : ${data.email}`,
       `Téléphone : ${data.phone || '—'}`,
       `Pack qui m'intéresse : ${data.pack || '—'}`,
@@ -84,7 +84,11 @@ const Contact = () => {
     setServerMsg('');
 
     // 1) Store in database in the background as backup (do not block UX)
-    axios.post(`${API}/contact`, form, { timeout: 15000 }).catch(() => {});
+    fetch(`${API}/contact`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    }).catch(() => {});
 
     // 2) Open the visitor's mail client with everything pre-filled.
     //    The visitor hits "Send" and the email arrives at contact@altitudemedia.fr
@@ -100,7 +104,7 @@ const Contact = () => {
       // Do NOT reset the form immediately — the visitor may need to return
       // to it if their mail client didn't open. We'll reset after 8s.
       setTimeout(() => {
-        setForm({ name: '', restaurant: '', email: '', phone: '', pack: '', engagement: '', message: '' });
+        setForm({ name: '', commerce: '', email: '', phone: '', pack: '', engagement: '', message: '' });
       }, 8000);
     } catch (err) {
       setStatus('error');
@@ -109,7 +113,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 bg-neutral-50">
+    <section id="contact" className="contact-premium relative py-24 md:py-32 bg-neutral-50">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
           {/* LEFT */}
@@ -118,15 +122,29 @@ const Contact = () => {
               Contact
             </span>
             <h2 className="text-[46px] md:text-[58px] font-black tracking-[-0.03em] text-neutral-900 leading-[0.95]">
-              Parlons de votre
+              Faisons grandir
               <br />
-              <span className="italic font-serif" style={{ fontFamily: '"Playfair Display", serif', fontWeight: 500 }}>restaurant</span>
+              <span className="italic font-serif" style={{ fontFamily: '"Playfair Display", serif', fontWeight: 500 }}>votre visibilité</span>
             </h2>
             <p className="mt-6 text-[15.5px] text-neutral-700 leading-relaxed max-w-md">
-              Décrivez-nous votre projet en quelques mots. Nous revenons vers vous sous 24h avec une proposition adaptée à vos besoins.
+              Pour commander une plaque, choisir votre accompagnement ou simplement poser une question, échangeons sur votre projet.
             </p>
 
+            <div className="contact-actions">
+              <a href="tel:+33668593384" className="primary-cta"><Phone /> Nous appeler</a>
+              <a href="mailto:contact@altitudemedia.fr" className="secondary-cta"><Mail /> Nous écrire</a>
+            </div>
+
             <div className="mt-10 space-y-4">
+              <div className="flex items-center gap-4">
+                <span className="w-11 h-11 rounded-2xl bg-neutral-100 flex items-center justify-center">
+                  <Phone className="w-4.5 h-4.5" />
+                </span>
+                <div>
+                  <div className="text-[12px] text-neutral-500">Téléphone</div>
+                  <a href="tel:+33668593384" className="text-[15px] font-semibold text-neutral-900">06 68 59 33 84</a>
+                </div>
+              </div>
               <div className="flex items-center gap-4">
                 <span className="w-11 h-11 rounded-2xl bg-indigo-100 flex items-center justify-center">
                   <Mail className="w-4.5 h-4.5 text-indigo-600" />
@@ -154,24 +172,28 @@ const Contact = () => {
           <form onSubmit={onSubmit} noValidate className="bg-white rounded-3xl p-7 md:p-9 shadow-xl border border-neutral-100 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Field icon={User} error={errors.name}>
-                <input value={form.name} onChange={update('name')} className={inputCls} placeholder="Votre nom *" />
+                <input aria-label="Votre nom" value={form.name} onChange={update('name')} className={inputCls} placeholder="Votre nom *" />
               </Field>
               <Field icon={Store}>
-                <input value={form.restaurant} onChange={update('restaurant')} className={inputCls} placeholder="Nom du restaurant" />
+                <input aria-label="Nom du commerce" value={form.commerce} onChange={update('commerce')} className={inputCls} placeholder="Nom du commerce" />
               </Field>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Field icon={Mail} error={errors.email}>
-                <input type="email" value={form.email} onChange={update('email')} className={inputCls} placeholder="Email *" />
+                <input aria-label="Adresse email" type="email" value={form.email} onChange={update('email')} className={inputCls} placeholder="Email *" />
               </Field>
               <Field icon={Phone}>
-                <input value={form.phone} onChange={update('phone')} className={inputCls} placeholder="Téléphone" />
+                <input aria-label="Numéro de téléphone" value={form.phone} onChange={update('phone')} className={inputCls} placeholder="Téléphone" />
               </Field>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Field>
-                <select value={form.pack} onChange={update('pack')} className={inputColored}>
-                  <option value="">Pack qui vous intéresse</option>
+                <select aria-label="Pack souhaité" value={form.pack} onChange={update('pack')} className={inputColored}>
+                  <option value="">Solution qui vous intéresse</option>
+                  {nfcProducts.map((product) => {
+                    const label = `${product.name} — ${product.price} €`;
+                    return <option key={product.id} value={label}>{label}</option>;
+                  })}
                   {packs.map((p) => (
                     <option key={p.id} value={p.name}>{p.name} — {p.price}€</option>
                   ))}
@@ -179,7 +201,7 @@ const Contact = () => {
                 </select>
               </Field>
               <Field>
-                <select value={form.engagement} onChange={update('engagement')} className={inputColored}>
+                <select aria-label="Durée d’engagement souhaitée" value={form.engagement} onChange={update('engagement')} className={inputColored}>
                   <option value="">Durée d'engagement</option>
                   {engagements.map((e) => (
                     <option key={e.months} value={`${e.months} mois`}>{e.months} mois</option>
@@ -188,7 +210,7 @@ const Contact = () => {
               </Field>
             </div>
             <Field error={errors.message}>
-              <textarea value={form.message} onChange={update('message')} rows={4} className={`${inputColored} resize-none`} placeholder="Parlez-nous de votre projet, vos objectifs, votre restaurant... *" />
+              <textarea aria-label="Votre message" value={form.message} onChange={update('message')} rows={4} className={`${inputColored} resize-none`} placeholder="Parlez-nous de votre commerce, de votre projet et de vos objectifs... *" />
             </Field>
 
             {status === 'success' && (

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Instagram, Linkedin, Facebook, Mail } from 'lucide-react';
+import React, { lazy, Suspense, useState } from 'react';
+import { Instagram, Mail, Phone } from 'lucide-react';
 import Logo from './Logo';
 import { images } from '../data/mock';
-import { MentionsLegalesModal, CGVModal, PrivacyModal } from './LegalModals';
+
+const LegalModalHost = lazy(() => import('./LegalModalHost'));
 
 const INSTAGRAM_URL = 'https://www.instagram.com/altitudemediaa/?hl=fr';
 
@@ -36,11 +37,11 @@ const Footer = () => {
             Prêt à faire grandir
             <br />
             <span className="italic font-serif" style={{ fontFamily: '"Playfair Display", serif', fontWeight: 500 }}>
-              votre restaurant ?
+              votre commerce ?
             </span>
           </h2>
           <p className="mt-6 text-[16px] text-neutral-700 max-w-lg mx-auto leading-relaxed">
-            Confiez votre communication à Altitude Media et concentrez-vous sur ce que vous faites de mieux : offrir une expérience unique à vos clients.
+            Plaques NFC ou accompagnement en communication : choisissez la solution adaptée à votre prochain objectif.
           </p>
           <button
             onClick={() => scrollTo('contact')}
@@ -55,7 +56,7 @@ const Footer = () => {
             <div className="md:col-span-1">
               <Logo size="md" />
               <p className="mt-5 text-[14px] text-neutral-600 leading-relaxed max-w-[280px]">
-                Nous faisons grandir les restaurants grâce à une communication qui attire plus de clients.
+                Des solutions concrètes pour la visibilité et la communication des commerces locaux.
               </p>
               <a
                 href="mailto:contact@altitudemedia.fr"
@@ -66,6 +67,7 @@ const Footer = () => {
                   <Mail className="w-3.5 h-3.5 text-neutral-900" />
                 </span>
               </a>
+              <a href="tel:+33668593384" className="footer-phone"><Phone /> 06 68 59 33 84</a>
             </div>
 
             <div>
@@ -138,20 +140,6 @@ const Footer = () => {
               >
                 <Instagram className="w-4 h-4 text-neutral-700 group-hover:text-white transition-colors" />
               </a>
-              <a
-                href="#"
-                aria-label="LinkedIn"
-                className="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-900 flex items-center justify-center transition-colors group"
-              >
-                <Linkedin className="w-4 h-4 text-neutral-700 group-hover:text-white transition-colors" />
-              </a>
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-900 flex items-center justify-center transition-colors group"
-              >
-                <Facebook className="w-4 h-4 text-neutral-700 group-hover:text-white transition-colors" />
-              </a>
             </div>
           </div>
         </div>
@@ -163,9 +151,18 @@ const Footer = () => {
         </div>
       </div>
 
-      <MentionsLegalesModal open={openLegal} onOpenChange={setOpenLegal} />
-      <CGVModal open={openCgv} onOpenChange={setOpenCgv} />
-      <PrivacyModal open={openPrivacy} onOpenChange={setOpenPrivacy} />
+      {(openLegal || openCgv || openPrivacy) && (
+        <Suspense fallback={null}>
+          <LegalModalHost
+            type={openLegal ? 'legal' : openCgv ? 'cgv' : 'privacy'}
+            onClose={() => {
+              setOpenLegal(false);
+              setOpenCgv(false);
+              setOpenPrivacy(false);
+            }}
+          />
+        </Suspense>
+      )}
     </footer>
   );
 };

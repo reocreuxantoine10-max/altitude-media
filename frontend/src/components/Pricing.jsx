@@ -1,23 +1,34 @@
 import React, { useEffect, useRef, useState } from 'react';
-import * as LucideIcons from 'lucide-react';
+import {
+  Aperture, ArrowDown, ArrowRight, BarChart3, CalendarClock, Camera, Check,
+  CheckCircle2, Clapperboard, Crown, FileBarChart, Film, Globe, Globe2,
+  ImagePlus, Images, Megaphone, MessageCircle, MessageSquare, Nfc, PartyPopper,
+  RefreshCw, Rocket, Smartphone, Sparkles, Target, TrendingUp, Video, Zap,
+} from 'lucide-react';
 import { packs, launchIncludes, options, engagements } from '../data/mock';
 
-const getIcon = (name) => LucideIcons[name] || LucideIcons.Check;
+const ICONS = {
+  Aperture, BarChart3, CalendarClock, Camera, Check, Clapperboard, Crown,
+  FileBarChart, Film, Globe, Globe2, ImagePlus, Images, Megaphone, MessageCircle,
+  MessageSquare, Nfc, PartyPopper, RefreshCw, Smartphone, Sparkles, Target,
+  TrendingUp, Video, Zap,
+};
+const getIcon = (name) => ICONS[name] || Check;
 
-const PackCard = ({ pack, popular }) => {
+const PackCard = ({ pack }) => {
   const isRec = pack.recommended;
   const isPremium = pack.tier === 'premium';
 
   const base = isRec
-    ? 'bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-800 text-white'
+    ? 'pack-card--recommended text-white'
     : isPremium
     ? 'bg-neutral-950 text-white'
-    : 'bg-neutral-50 text-neutral-900 border border-neutral-200';
+    : 'pack-card--light text-neutral-900 border border-neutral-200';
   const priceCol = isRec || isPremium ? 'text-white' : 'text-neutral-900';
   const subCol = isRec ? 'text-indigo-100' : isPremium ? 'text-neutral-400' : 'text-neutral-600';
 
   return (
-    <div className={`hover-card relative ${base} rounded-3xl p-7 md:p-8 shadow-xl flex flex-col`}>
+    <article className={`pack-card hover-card relative ${base} rounded-3xl p-7 md:p-8 shadow-xl flex flex-col`}>
       {isRec && (
         <div className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-white text-indigo-700 text-[11px] font-bold tracking-wide shadow-md">
           RECOMMANDÉ
@@ -58,7 +69,8 @@ const PackCard = ({ pack, popular }) => {
           );
         })}
       </ul>
-    </div>
+      <button className="pack-cta" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Choisir ce pack <ArrowRight /></button>
+    </article>
   );
 };
 
@@ -73,16 +85,17 @@ const Pricing = () => {
   }, []);
 
   return (
-    <section id="prix" ref={ref} className="relative py-24 md:py-32 bg-gradient-to-b from-white via-neutral-50 to-white">
+    <section id="prix" ref={ref} className="pricing-premium relative py-24 md:py-32">
       <div className={`max-w-7xl mx-auto px-6 reveal ${visible ? 'visible' : ''}`}>
         <div className="text-center mb-14">
           <span className="inline-block px-4 py-1.5 rounded-full bg-neutral-100 text-[13px] font-medium text-neutral-700 mb-5">
-            Nos abonnements
+            Accompagnement & abonnements
           </span>
-          <h2 className="text-[46px] md:text-[64px] font-black tracking-[-0.03em] text-neutral-900 leading-[0.95]">
-            Des offres adaptées
+          <p className="pricing-transition">La plaque crée le premier contact. L’accompagnement développe votre présence dans la durée.</p>
+          <h2 className="text-[36px] sm:text-[46px] md:text-[64px] font-black tracking-[-0.03em] text-neutral-900 leading-[0.95]">
+            Faites progresser votre communication
             <br />
-            <span className="italic font-serif" style={{ fontFamily: '"Playfair Display", serif', fontWeight: 500 }}>à vos besoins
+            <span className="italic font-serif" style={{ fontFamily: '"Playfair Display", serif', fontWeight: 500 }}>avec le bon niveau d’accompagnement
             </span>
           </h2>
           <p className="mt-5 text-[15px] text-neutral-600">
@@ -90,13 +103,23 @@ const Pricing = () => {
           </p>
         </div>
 
+        <div className="included-plate-callout">
+          <span className="included-plate-callout__icon"><Nfc /></span>
+          <div>
+            <small>Une solution complète</small>
+            <h3>La plaque NFC est aussi intégrée à l’accompagnement.</h3>
+            <p>Vous pouvez acheter une plaque seule, ou la retrouver dans la mise en place prévue avec votre abonnement.</p>
+          </div>
+          <ArrowDown className="included-plate-callout__arrow" />
+        </div>
+
         {/* Launch fees card */}
-        <div className="mb-8 max-w-4xl mx-auto rounded-3xl bg-neutral-950 text-white p-8 md:p-10 shadow-2xl relative overflow-hidden">
+        <div className="launch-card mb-8 max-w-4xl mx-auto rounded-3xl text-white p-8 md:p-10 shadow-2xl relative overflow-hidden">
           <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-indigo-600/20 blur-3xl" />
           <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[12px] font-medium mb-3">
-                <LucideIcons.Rocket className="w-3.5 h-3.5" /> Obligatoire
+                <Rocket className="w-3.5 h-3.5" /> Obligatoire
               </div>
               <h3 className="text-[32px] md:text-[36px] font-black leading-none tracking-tight">Frais de lancement</h3>
               <div className="mt-2 flex items-baseline gap-1">
@@ -107,7 +130,7 @@ const Pricing = () => {
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 max-w-md">
               {launchIncludes.map((it, i) => (
                 <li key={i} className="flex items-start gap-2 text-[13px] text-neutral-300">
-                  <LucideIcons.CheckCircle2 className="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" />
                   <span>{it}</span>
                 </li>
               ))}
@@ -117,7 +140,7 @@ const Pricing = () => {
 
         {/* PROMO BANNER - VERY VISIBLE, BEFORE THE PACKS */}
         <div className="mb-14 relative">
-          <div className="relative rounded-[32px] bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 text-white p-1 shadow-[0_25px_60px_-15px_rgba(16,185,129,0.55)] animate-scale-in">
+          <div className="offer-card relative rounded-[32px] text-white p-1 animate-scale-in">
             <div className="absolute -top-8 -left-8 w-40 h-40 rounded-full bg-yellow-300/40 blur-3xl animate-pulse" />
             <div className="absolute -bottom-10 -right-10 w-56 h-56 rounded-full bg-teal-300/30 blur-3xl" />
 
@@ -131,7 +154,7 @@ const Pricing = () => {
               }}
             />
 
-            <div className="relative rounded-[28px] bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 px-8 py-10 md:px-12 md:py-12 overflow-hidden">
+            <div className="relative rounded-[28px] px-8 py-10 md:px-12 md:py-12 overflow-hidden">
               <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-10">
                 {/* Left: Giant -50% */}
                 <div className="flex items-center gap-5 flex-shrink-0">
@@ -149,7 +172,7 @@ const Pricing = () => {
                 {/* Middle: Content */}
                 <div className="flex-1">
                   <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-emerald-700 text-[11px] font-black tracking-[0.14em] uppercase mb-3">
-                    <LucideIcons.Sparkles className="w-3.5 h-3.5" />
+                    <Sparkles className="w-3.5 h-3.5" />
                     Offre en cours
                   </span>
                   <h3 className="text-[26px] md:text-[34px] font-black leading-[1.05] tracking-tight">
@@ -165,7 +188,7 @@ const Pricing = () => {
                         key={e.months}
                         className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/15 backdrop-blur text-[13px] font-bold border border-white/25"
                       >
-                        <LucideIcons.CheckCircle2 className="w-3.5 h-3.5" />
+                        <CheckCircle2 className="w-3.5 h-3.5" />
                         {e.months} mois
                       </span>
                     ))}
@@ -177,9 +200,9 @@ const Pricing = () => {
 
           {/* Little arrow pointing down */}
           <div className="flex items-center justify-center gap-2 mt-5 text-[13px] font-semibold text-emerald-700 animate-pulse">
-            <LucideIcons.ArrowDown className="w-4 h-4" />
+            <ArrowDown className="w-4 h-4" />
             Découvrez nos abonnements ci-dessous
-            <LucideIcons.ArrowDown className="w-4 h-4" />
+            <ArrowDown className="w-4 h-4" />
           </div>
         </div>
 
@@ -242,9 +265,9 @@ const Pricing = () => {
             }}
             className="btn-glow inline-flex items-center gap-3 pl-7 pr-2 py-2.5 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 text-white font-semibold text-[16px]"
           >
-            Commencer dès maintenant
+            Nous contacter
             <span className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-              <LucideIcons.ArrowRight className="w-4 h-4 text-indigo-600" />
+              <ArrowRight className="w-4 h-4 text-indigo-600" />
             </span>
           </button>
           <p className="mt-4 text-[13px] text-neutral-500">Un conseiller revient vers vous sous 24h avec une proposition personnalisée.</p>
