@@ -52,7 +52,7 @@ export const CGVModal = ({ open, onOpenChange }) => (
       </DialogHeader>
       <ScrollArea className="max-h-[70vh] pr-4">
         <Section title="Article 1 — Objet">
-          <p>Les présentes Conditions Générales de Vente (CGV) régissent l'ensemble des prestations de communication, création de contenu, gestion de fiche Google Business Profile et gestion de réseaux sociaux fournies par Altitude Media à ses clients professionnels (restaurants et commerces).</p>
+          <p>Les présentes Conditions Générales de Vente (CGV) régissent l'ensemble des prestations de communication, création de contenu, gestion de fiche Google Business Profile et gestion de réseaux sociaux fournies par Altitude Media à ses clients professionnels.</p>
         </Section>
         <Section title="Article 2 — Prestations proposées">
           <p>Altitude Media propose plusieurs formules d'abonnement mensuel : Pack Google (179 €/mois), Pack Réseaux Sociaux (179 €/mois), Pack Croissance (349 €/mois), Pack Premium (599 €/mois). Chaque formule s'accompagne de frais de lancement obligatoires d'un montant de 329 €.</p>
@@ -95,7 +95,7 @@ export const PrivacyModal = ({ open, onOpenChange }) => (
           <p>Altitude Media est responsable du traitement des données personnelles collectées via le site altitudemedia.fr, conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés du 6 janvier 1978 modifiée.</p>
         </Section>
         <Section title="Données collectées">
-          <p>Nous collectons uniquement les données que vous nous communiquez volontairement via le formulaire de contact : nom, nom du restaurant, adresse email, numéro de téléphone, message et intérêt éventuel pour un pack. Aucune donnée sensible n'est collectée.</p>
+          <p>Nous collectons uniquement les données que vous nous communiquez volontairement via le formulaire de contact : nom, nom du commerce, adresse email, numéro de téléphone, message et intérêt éventuel pour un pack. Aucune donnée sensible n'est collectée.</p>
         </Section>
         <Section title="Finalités du traitement">
           <p>Vos données sont utilisées uniquement pour :</p>

@@ -40,7 +40,7 @@ const PeakVisual = () => (
       <div className="w-40 h-40 rounded-full bg-indigo-500/20 blur-3xl animate-pulse" />
     </div>
     <img
-      src="https://customer-assets-eiarnc6j.emergentagent.net/job_restaurant-comms-pro/artifacts/v94dhw3t_LOGO%20GLASS.webp"
+      src="/brand/altitude-media-glass.webp"
       alt="Altitude glass mark"
       className="relative z-10 w-[180px] h-auto drop-shadow-2xl"
       style={{ animation: 'slowPulse 6s ease-in-out infinite' }}

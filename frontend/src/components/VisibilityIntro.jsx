@@ -17,14 +17,14 @@ const VisibilityIntro = () => (
         <small>Plaques NFC</small>
         <h3>Facilitez chaque interaction client.</h3>
         <p>Google, QR code, NFC ou réseaux sociaux : vos clients accèdent à la bonne destination en un geste.</p>
-        <button onClick={() => goTo('nfc')}>Voir les plaques <ArrowRight /></button>
+        <button onClick={() => goTo('nfc')}>Découvrir les plaques <ArrowRight /></button>
       </article>
       <article className="pillar-card pillar-card--support">
         <span className="pillar-index">02</span><TrendingUp />
         <small>Accompagnement</small>
         <h3>Développez votre présence dans la durée.</h3>
         <p>Contenus, réseaux sociaux, Google et stratégie : choisissez le niveau d’accompagnement adapté.</p>
-        <button onClick={() => goTo('prix')}>Découvrir les abonnements <ArrowRight /></button>
+        <button onClick={() => goTo('prix')}>Découvrir les offres <ArrowRight /></button>
       </article>
     </div>
   </section>

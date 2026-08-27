@@ -28,7 +28,7 @@ const inputColored = 'w-full bg-transparent py-3.5 px-4 text-[14.5px] text-neutr
 const Contact = () => {
   const [form, setForm] = useState({
     name: '',
-    restaurant: '',
+    commerce: '',
     email: '',
     phone: '',
     pack: '',
@@ -55,14 +55,14 @@ const Contact = () => {
   };
 
   const buildMailto = (data) => {
-    const subject = `Nouvelle demande — ${data.name}${data.restaurant ? ' (' + data.restaurant + ')' : ''}`;
+    const subject = `Nouvelle demande — ${data.name}${data.commerce ? ' (' + data.commerce + ')' : ''}`;
     const bodyLines = [
       `Bonjour Altitude Media,`,
       ``,
       `Je vous contacte via le site altitudemedia.fr :`,
       ``,
       `Nom : ${data.name}`,
-      `Commerce : ${data.restaurant || '—'}`,
+      `Commerce : ${data.commerce || '—'}`,
       `Email : ${data.email}`,
       `Téléphone : ${data.phone || '—'}`,
       `Pack qui m'intéresse : ${data.pack || '—'}`,
@@ -101,7 +101,7 @@ const Contact = () => {
       // Do NOT reset the form immediately — the visitor may need to return
       // to it if their mail client didn't open. We'll reset after 8s.
       setTimeout(() => {
-        setForm({ name: '', restaurant: '', email: '', phone: '', pack: '', engagement: '', message: '' });
+        setForm({ name: '', commerce: '', email: '', phone: '', pack: '', engagement: '', message: '' });
       }, 8000);
     } catch (err) {
       setStatus('error');
@@ -172,7 +172,7 @@ const Contact = () => {
                 <input aria-label="Votre nom" value={form.name} onChange={update('name')} className={inputCls} placeholder="Votre nom *" />
               </Field>
               <Field icon={Store}>
-                <input aria-label="Nom du commerce" value={form.restaurant} onChange={update('restaurant')} className={inputCls} placeholder="Nom du commerce" />
+                <input aria-label="Nom du commerce" value={form.commerce} onChange={update('commerce')} className={inputCls} placeholder="Nom du commerce" />
               </Field>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

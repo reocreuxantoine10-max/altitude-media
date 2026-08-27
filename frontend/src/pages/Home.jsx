@@ -6,7 +6,6 @@ import NFCProducts from '../components/NFCProducts';
 import ProductSelector from '../components/ProductSelector';
 import ExplodedPlate from '../components/ExplodedPlate';
 import HowItWorks from '../components/HowItWorks';
-import Stats from '../components/Stats';
 import Levers from '../components/Levers';
 import Process from '../components/Process';
 import Pricing from '../components/Pricing';
@@ -43,13 +42,12 @@ const Home = () => {
         <VisibilityIntro />
         <NFCProducts />
         <ProductSelector />
-        <ExplodedPlate />
-        <HowItWorks />
-        <Stats />
-        <Levers />
-        <Process />
         <Pricing />
         <PriceConfigurator />
+        <ExplodedPlate />
+        <HowItWorks />
+        <Levers />
+        <Process />
         <FAQ />
         <Contact />
       </main>

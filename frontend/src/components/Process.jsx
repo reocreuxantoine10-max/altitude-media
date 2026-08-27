@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import * as LucideIcons from 'lucide-react';
+import { Camera, Circle, Clock, Search, TrendingUp, Wrench } from 'lucide-react';
 import { process } from '../data/mock';
+
+const PROCESS_ICONS = { Camera, Search, TrendingUp, Wrench };
 
 const Process = () => {
   const ref = useRef(null);
@@ -42,7 +44,7 @@ const Process = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
             {process.map((p, i) => {
-              const Icon = LucideIcons[p.icon] || LucideIcons.Circle;
+              const Icon = PROCESS_ICONS[p.icon] || Circle;
               return (
                 <div
                   key={p.step}
@@ -62,7 +64,7 @@ const Process = () => {
                     <h3 className="text-[19px] font-bold text-neutral-900 tracking-tight">{p.title}</h3>
                     <p className="mt-2 text-[13.5px] text-neutral-600 leading-relaxed">{p.desc}</p>
                     <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 text-[11px] font-semibold text-neutral-700">
-                      <LucideIcons.Clock className="w-3 h-3" />
+                      <Clock className="w-3 h-3" />
                       {p.duration}
                     </div>
                   </div>
