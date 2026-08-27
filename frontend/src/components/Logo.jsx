@@ -11,6 +11,8 @@ const Logo = ({ size = 'md', variant = 'horizontal' }) => {
       <img
         src={src}
         alt="Altitude Media"
+        width={variant === 'mark' ? 2000 : 600}
+        height={variant === 'mark' ? 2000 : 221}
         style={{ height: h, width: 'auto', display: 'block' }}
         draggable={false}
       />

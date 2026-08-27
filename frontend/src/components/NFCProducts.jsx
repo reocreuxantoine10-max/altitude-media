@@ -21,7 +21,16 @@ const NFCProducts = () => (
       </div>
       <div className="nfc-focus__visual">
         <div className="product-halo" />
-        <img src={counterPlate.variants[1].image} width={counterPlate.variants[1].width} height={counterPlate.variants[1].height} loading="lazy" decoding="async" alt="Plaque NFC de comptoir noire pour avis Google" />
+        <img
+          src={counterPlate.variants[1].image}
+          srcSet="/products/google-counter-black-640.webp 640w, /products/google-counter-black-cutout.webp 1183w"
+          sizes="(max-width: 768px) 82vw, 42vw"
+          width={counterPlate.variants[1].width}
+          height={counterPlate.variants[1].height}
+          loading="lazy"
+          decoding="async"
+          alt="Plaque NFC de comptoir noire pour avis Google"
+        />
         <span className="floating-tag floating-tag--price"><small>{counterPlate.name}</small><strong>{counterPlate.price} €</strong></span>
         <span className="floating-tag floating-tag--nfc"><Nfc /> NFC + QR</span>
       </div>

@@ -7,9 +7,13 @@
         <meta name="description" content="Altitude Media développe la visibilité des commerces locaux avec des plaques NFC, Google, les réseaux sociaux et un accompagnement digital." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://www.altitudemedia.fr/" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet" />
+        <link rel="preload" href="%PUBLIC_URL%/mountains/hero-alpine-pass.webp" as="image" type="image/webp" fetchpriority="high" />
+        <link rel="preload" href="%PUBLIC_URL%/fonts/manrope-variable.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="%PUBLIC_URL%/fonts/playfair-display-italic-variable.woff2" as="font" type="font/woff2" crossorigin />
+        <style>
+          @font-face{font-family:'Manrope';src:url('%PUBLIC_URL%/fonts/manrope-variable.woff2') format('woff2');font-style:normal;font-weight:400 900;font-display:swap}
+          @font-face{font-family:'Playfair Display';src:url('%PUBLIC_URL%/fonts/playfair-display-italic-variable.woff2') format('woff2');font-style:italic;font-weight:400 600;font-display:swap}
+        </style>
         <!--
         manifest.json provides metadata used when your web app is installed on a
         user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/

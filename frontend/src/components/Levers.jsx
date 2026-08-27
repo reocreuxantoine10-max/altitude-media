@@ -42,6 +42,8 @@ const PeakVisual = () => (
     <img
       src="/brand/altitude-media-glass.webp"
       alt="Altitude glass mark"
+      loading="lazy"
+      decoding="async"
       className="relative z-10 w-[180px] h-auto drop-shadow-2xl"
       style={{ animation: 'slowPulse 6s ease-in-out infinite' }}
     />

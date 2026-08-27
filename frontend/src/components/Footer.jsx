@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { Instagram, Mail, Phone } from 'lucide-react';
 import Logo from './Logo';
 import { images } from '../data/mock';
-import { MentionsLegalesModal, CGVModal, PrivacyModal } from './LegalModals';
+
+const LegalModalHost = lazy(() => import('./LegalModalHost'));
 
 const INSTAGRAM_URL = 'https://www.instagram.com/altitudemediaa/?hl=fr';
 
@@ -150,9 +151,18 @@ const Footer = () => {
         </div>
       </div>
 
-      <MentionsLegalesModal open={openLegal} onOpenChange={setOpenLegal} />
-      <CGVModal open={openCgv} onOpenChange={setOpenCgv} />
-      <PrivacyModal open={openPrivacy} onOpenChange={setOpenPrivacy} />
+      {(openLegal || openCgv || openPrivacy) && (
+        <Suspense fallback={null}>
+          <LegalModalHost
+            type={openLegal ? 'legal' : openCgv ? 'cgv' : 'privacy'}
+            onClose={() => {
+              setOpenLegal(false);
+              setOpenCgv(false);
+              setOpenPrivacy(false);
+            }}
+          />
+        </Suspense>
+      )}
     </footer>
   );
 };

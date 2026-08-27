@@ -40,10 +40,10 @@ const ExplodedPlate = () => {
         <div className="transformation-stage" aria-label="Transformation de la plaque blanche assemblée vers sa vue décomposée">
           <img className="transformation-image transformation-image--assembled" src="/products/google-counter-white-cutout.webp" width="1145" height="1374" loading="lazy" decoding="async" alt="Plaque NFC blanche assemblée" />
           <div className="exploded-frames" aria-hidden="true">
-            <img className="exploded-frame exploded-frame--support" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" alt="" />
-            <img className="exploded-frame exploded-frame--antenna" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" alt="" />
-            <img className="exploded-frame exploded-frame--substrate" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" alt="" />
-            <img className="exploded-frame exploded-frame--face" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" alt="" />
+            <img className="exploded-frame exploded-frame--support" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="" />
+            <img className="exploded-frame exploded-frame--antenna" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="" />
+            <img className="exploded-frame exploded-frame--substrate" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="" />
+            <img className="exploded-frame exploded-frame--face" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="" />
           </div>
           <img className="transformation-image transformation-image--exploded" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="Vue décomposée de la plaque NFC blanche avec antenne visible" />
           <span className="tech-note tech-note--one">Technologie NFC intégrée</span>

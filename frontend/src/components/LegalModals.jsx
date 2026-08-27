@@ -11,7 +11,7 @@ const Section = ({ title, children }) => (
 
 export const MentionsLegalesModal = ({ open, onOpenChange }) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
-    <DialogContent className="max-w-2xl max-h-[85vh] bg-white">
+    <DialogContent aria-describedby={undefined} className="max-w-2xl max-h-[85vh] bg-white">
       <DialogHeader>
         <DialogTitle className="text-[22px] font-black tracking-tight">Mentions légales</DialogTitle>
       </DialogHeader>
@@ -46,7 +46,7 @@ export const MentionsLegalesModal = ({ open, onOpenChange }) => (
 
 export const CGVModal = ({ open, onOpenChange }) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
-    <DialogContent className="max-w-2xl max-h-[85vh] bg-white">
+    <DialogContent aria-describedby={undefined} className="max-w-2xl max-h-[85vh] bg-white">
       <DialogHeader>
         <DialogTitle className="text-[22px] font-black tracking-tight">Conditions Générales de Vente</DialogTitle>
       </DialogHeader>
@@ -86,7 +86,7 @@ export const CGVModal = ({ open, onOpenChange }) => (
 
 export const PrivacyModal = ({ open, onOpenChange }) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
-    <DialogContent className="max-w-2xl max-h-[85vh] bg-white">
+    <DialogContent aria-describedby={undefined} className="max-w-2xl max-h-[85vh] bg-white">
       <DialogHeader>
         <DialogTitle className="text-[22px] font-black tracking-tight">Politique de confidentialité</DialogTitle>
       </DialogHeader>

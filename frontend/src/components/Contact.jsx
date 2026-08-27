@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Send, User, Store, Mail, Phone, MessageSquare, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { packs, engagements } from '../data/mock';
 import { nfcProducts } from '../data/site';
@@ -85,7 +84,11 @@ const Contact = () => {
     setServerMsg('');
 
     // 1) Store in database in the background as backup (do not block UX)
-    axios.post(`${API}/contact`, form, { timeout: 15000 }).catch(() => {});
+    fetch(`${API}/contact`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    }).catch(() => {});
 
     // 2) Open the visitor's mail client with everything pre-filled.
     //    The visitor hits "Send" and the email arrives at contact@altitudemedia.fr
