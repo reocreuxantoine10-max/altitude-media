@@ -8,6 +8,8 @@ const MountainLayers = () => (
       <div className="mountain-photo-depth mountain-photo-depth--left"><img src="/mountains/hero-alpine-pass.webp" alt="" /></div>
       <div className="mountain-photo-depth mountain-photo-depth--right"><img src="/mountains/hero-alpine-pass.webp" alt="" /></div>
     </div>
+    <div className="mountain-valley-light" />
+    <div className="mountain-flight-lines" />
     <div className="mountain-photo-scrim" />
     <div className="mountain-mist mountain-mist--one" />
     <div className="mountain-mist mountain-mist--two" />
