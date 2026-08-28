@@ -1,37 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { lazy, startTransition, Suspense, useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import VisibilityIntro from '../components/VisibilityIntro';
-import NFCProducts from '../components/NFCProducts';
-import ProductSelector from '../components/ProductSelector';
-import ExplodedPlate from '../components/ExplodedPlate';
-import HowItWorks from '../components/HowItWorks';
-import Levers from '../components/Levers';
-import Process from '../components/Process';
-import Pricing from '../components/Pricing';
-import PriceConfigurator from '../components/PriceConfigurator';
-import FAQ from '../components/FAQ';
-import Contact from '../components/Contact';
-import Footer from '../components/Footer';
+
+const BelowFold = lazy(() => import('../components/BelowFold'));
+const Footer = lazy(() => import('../components/Footer'));
 
 const Home = () => {
+  const [showBelowFold, setShowBelowFold] = useState(false);
+
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const sections = document.querySelectorAll('main > section:not(.mountain-journey)');
-    if (reduced) {
-      sections.forEach((section) => section.classList.add('section-in-view'));
-      return undefined;
-    }
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('section-in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    const activationEvents = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
+    const reveal = () => {
+      startTransition(() => setShowBelowFold(true));
+      activationEvents.forEach((eventName) => window.removeEventListener(eventName, reveal));
+    };
+    activationEvents.forEach((eventName) => window.addEventListener(eventName, reveal, { passive: true, once: true }));
+    window.addEventListener('altitude:reveal-content', reveal, { once: true });
+    const fallback = window.setTimeout(reveal, 10000);
+    return () => {
+      window.clearTimeout(fallback);
+      activationEvents.forEach((eventName) => window.removeEventListener(eventName, reveal));
+      window.removeEventListener('altitude:reveal-content', reveal);
+    };
   }, []);
 
   return (
@@ -39,19 +29,9 @@ const Home = () => {
       <Navbar />
       <main>
         <Hero />
-        <VisibilityIntro />
-        <NFCProducts />
-        <ProductSelector />
-        <Pricing />
-        <PriceConfigurator />
-        <ExplodedPlate />
-        <HowItWorks />
-        <Levers />
-        <Process />
-        <FAQ />
-        <Contact />
+        {showBelowFold ? <Suspense fallback={null}><BelowFold /></Suspense> : null}
       </main>
-      <Footer />
+      {showBelowFold ? <Suspense fallback={null}><Footer /></Suspense> : null}
     </div>
   );
 };

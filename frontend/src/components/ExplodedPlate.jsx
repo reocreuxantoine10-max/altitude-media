@@ -1,55 +1,85 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Nfc } from 'lucide-react';
 
 const ExplodedPlate = () => {
   const sectionRef = useRef(null);
+  const videoRef = useRef(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    let frame;
-    const update = () => {
-      if (!sectionRef.current) return;
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const distance = sectionRef.current.offsetHeight - window.innerHeight;
-      const progress = reduced ? 1 : Math.min(1, Math.max(0, -sectionRef.current.getBoundingClientRect().top / Math.max(distance, 1)));
-      const smooth = progress * progress * (3 - 2 * progress);
-      const opening = Math.min(1, Math.max(0, (smooth - 0.12) / 0.5));
-      const reveal = Math.min(1, Math.max(0, (smooth - 0.28) / 0.42));
-      const settle = Math.min(1, Math.max(0, (smooth - 0.7) / 0.3));
-      const framesOpacity = smooth < 0.2 ? 0 : smooth < 0.74 ? Math.min(1, (smooth - 0.2) / 0.16) : Math.max(0, 1 - (smooth - 0.74) / 0.2);
-      sectionRef.current.style.setProperty('--tech-progress', smooth.toFixed(4));
-      sectionRef.current.style.setProperty('--plate-opening', opening.toFixed(4));
-      sectionRef.current.style.setProperty('--internal-reveal', reveal.toFixed(4));
-      sectionRef.current.style.setProperty('--plate-settle', settle.toFixed(4));
-      sectionRef.current.style.setProperty('--frames-opacity', framesOpacity.toFixed(4));
-    };
-    const onScroll = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); };
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
+    const section = sectionRef.current;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!section || reduced) return undefined;
+
+    const preloadObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setShouldLoad(true);
+        preloadObserver.disconnect();
+      }
+    }, { rootMargin: '450px 0px' });
+
+    preloadObserver.observe(section);
+    return () => preloadObserver.disconnect();
   }, []);
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    const video = videoRef.current;
+    if (!section || !video || !shouldLoad) return undefined;
+
+    const playbackObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+      } else {
+        video.pause();
+      }
+    }, { threshold: 0.32 });
+
+    playbackObserver.observe(section);
+    return () => {
+      playbackObserver.disconnect();
+      video.pause();
+    };
+  }, [shouldLoad]);
+
   return (
-    <section id="technologie" ref={sectionRef} className="exploded-section product-transformation">
-      <div className="exploded-sticky">
-        <div className="exploded-copy">
+    <section id="technologie" ref={sectionRef} className="exploded-section product-transformation product-film">
+      <div className="exploded-sticky product-film__layout">
+        <div className="exploded-copy product-film__copy">
           <span className="eyebrow"><Nfc /> La technologie, simplement</span>
           <h2>La plaque s’ouvre.<br /><em>La technologie se révèle.</em></h2>
           <p>Une plaque prête à guider vos clients vers votre page d’avis Google, par NFC ou QR code.</p>
-        </div>
-        <div className="transformation-stage" aria-label="Transformation de la plaque blanche assemblée vers sa vue décomposée">
-          <img className="transformation-image transformation-image--assembled" src="/products/google-counter-white-cutout.webp" width="1145" height="1374" loading="lazy" decoding="async" alt="Plaque NFC blanche assemblée" />
-          <div className="exploded-frames" aria-hidden="true">
-            <img className="exploded-frame exploded-frame--support" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="" />
-            <img className="exploded-frame exploded-frame--antenna" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="" />
-            <img className="exploded-frame exploded-frame--substrate" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="" />
-            <img className="exploded-frame exploded-frame--face" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="" />
+          <div className="product-film__legend" aria-hidden="true">
+            <span>Plaque assemblée</span><i /><span>Technologie intégrée</span>
           </div>
-          <img className="transformation-image transformation-image--exploded" src="/products/google-counter-white-exploded-cutout.webp" width="1312" height="1199" loading="lazy" decoding="async" alt="Vue décomposée de la plaque NFC blanche avec antenne visible" />
-          <span className="tech-note tech-note--one">Technologie NFC intégrée</span>
-          <span className="tech-note tech-note--two">NFC + QR code</span>
         </div>
-        <div className="exploded-progress"><span>Plaque assemblée</span><i><b /></i><span>Vue décomposée</span></div>
+
+        <div className={`product-film__stage ${isPlaying ? 'is-playing' : ''}`} role="img" aria-label="Animation montrant les différentes couches de la plaque NFC Google">
+          <div className="product-film__halo" />
+          <div className="product-film__frame">
+            <img className="product-film__poster" src="/motion/nfc-plate-poster.webp" width="720" height="676" loading="lazy" decoding="async" alt="Plaque NFC Google assemblée" />
+            {shouldLoad && (
+              <video
+                ref={videoRef}
+                className="product-film__video"
+                width="720"
+                height="676"
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster="/motion/nfc-plate-poster.webp"
+                aria-hidden="true"
+              >
+                <source src="/motion/nfc-plate-reveal.webm" type="video/webm" />
+                <source src="/motion/nfc-plate-reveal.mp4" type="video/mp4" />
+              </video>
+            )}
+          </div>
+          <span className="tech-note product-film__note product-film__note--one">Technologie NFC intégrée</span>
+          <span className="tech-note product-film__note product-film__note--two">NFC + QR code</span>
+        </div>
       </div>
     </section>
   );
