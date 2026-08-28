@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown, MapPin, Nfc } from 'lucide-react';
 import MountainLayers from './MountainLayers';
 import Logo from './Logo';
+import { scrollToSection } from '../utils/scrollToSection';
 
 const Hero = () => {
   const sectionRef = useRef(null);
@@ -11,20 +12,6 @@ const Hero = () => {
   const [reducedMotion, setReducedMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
-  const [videoEnabled, setVideoEnabled] = useState(false);
-
-  useEffect(() => {
-    if (reducedMotion) return undefined;
-    const events = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
-    const enable = () => {
-      setVideoEnabled(true);
-      events.forEach((eventName) => window.removeEventListener(eventName, enable));
-    };
-    events.forEach((eventName) => window.addEventListener(eventName, enable, { passive: true, once: true }));
-    return () => {
-      events.forEach((eventName) => window.removeEventListener(eventName, enable));
-    };
-  }, [reducedMotion]);
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -32,61 +19,64 @@ const Hero = () => {
     const onMotionChange = () => setReducedMotion(media.matches);
     media.addEventListener?.('change', onMotionChange);
 
-    let scrubFrame = 0;
-    let updateFrame = 0;
-    let updateScheduled = false;
-    let scrubbing = false;
-    const scrub = () => {
-      const video = videoRef.current;
-      if (!video || !Number.isFinite(video.duration)) {
-        scrubbing = false;
-        return;
-      }
-      const difference = targetTimeRef.current - video.currentTime;
-      if (Math.abs(difference) < 0.012) {
-        video.currentTime = targetTimeRef.current;
-        scrubbing = false;
-        return;
-      }
-      video.currentTime += difference * 0.22;
-      scrubFrame = requestAnimationFrame(scrub);
-    };
-    const requestScrub = () => {
-      if (!scrubbing) {
-        scrubbing = true;
-        scrubFrame = requestAnimationFrame(scrub);
-      }
-    };
+    const activationEvents = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
+    let frame = 0;
+    let scheduled = false;
+    let heroActive = true;
     const update = () => {
+      scheduled = false;
       if (!sectionRef.current) return;
       const distance = sectionRef.current.offsetHeight - window.innerHeight;
       const progress = media.matches ? 1 : Math.min(1, Math.max(0, -sectionRef.current.getBoundingClientRect().top / Math.max(distance, 1)));
       sectionRef.current.style.setProperty('--journey', progress.toFixed(4));
+      sectionRef.current.classList.toggle('is-travelling', progress > 0.004);
       const video = videoRef.current;
       if (!media.matches && video && Number.isFinite(video.duration)) {
         const travelProgress = Math.min(1, progress / 0.82);
         targetTimeRef.current = travelProgress * Math.max(0, video.duration - 0.04);
-        requestScrub();
+        const difference = targetTimeRef.current - video.currentTime;
+        if (Math.abs(difference) > 0.018) {
+          video.currentTime += difference * 0.24;
+          scheduled = true;
+          frame = requestAnimationFrame(update);
+        }
       }
     };
     updateHeroRef.current = update;
-    const onScroll = () => {
-      if (updateScheduled) return;
-      updateScheduled = true;
-      updateFrame = requestAnimationFrame(() => {
-        updateScheduled = false;
-        update();
-      });
+    const requestUpdate = () => {
+      if (!heroActive || scheduled) return;
+      scheduled = true;
+      frame = requestAnimationFrame(update);
+    };
+    const loadVideo = () => {
+      const video = videoRef.current;
+      if (!media.matches && video && !video.src) {
+        const supportsWebm = video.canPlayType('video/webm; codecs="vp9"');
+        video.src = supportsWebm ? '/motion/mountain-traverse.webm' : '/motion/mountain-traverse.mp4';
+        video.load();
+      }
+      activationEvents.forEach((eventName) => window.removeEventListener(eventName, loadVideo));
     };
     update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    activationEvents.forEach((eventName) => window.addEventListener(eventName, loadVideo, { passive: true, once: true }));
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    const observer = new IntersectionObserver(([entry]) => {
+      heroActive = entry.isIntersecting;
+      if (heroActive) requestUpdate();
+      else {
+        cancelAnimationFrame(frame);
+        scheduled = false;
+      }
+    }, { rootMargin: '100px 0px' });
+    observer.observe(sectionRef.current);
     return () => {
-      cancelAnimationFrame(scrubFrame);
-      cancelAnimationFrame(updateFrame);
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      activationEvents.forEach((eventName) => window.removeEventListener(eventName, loadVideo));
       media.removeEventListener?.('change', onMotionChange);
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
     };
   }, []);
 
@@ -96,7 +86,6 @@ const Hero = () => {
         <MountainLayers
           videoRef={videoRef}
           reducedMotion={reducedMotion}
-          videoEnabled={videoEnabled}
           onVideoMetadata={() => updateHeroRef.current()}
         />
         <div className="journey-opening">
@@ -109,8 +98,8 @@ const Hero = () => {
           <div className="brand-reveal__logo"><Logo size="lg" /></div>
           <p>Deux solutions, une même ambition : faire grandir votre visibilité.</p>
           <div className="brand-reveal__actions">
-            <button onClick={() => document.getElementById('nfc')?.scrollIntoView({ behavior: 'smooth' })}>Découvrir les plaques <Nfc /></button>
-            <button className="brand-reveal__secondary" onClick={() => document.getElementById('prix')?.scrollIntoView({ behavior: 'smooth' })}>Voir l’accompagnement</button>
+            <button onClick={() => scrollToSection('nfc')}>Découvrir les plaques <Nfc /></button>
+            <button className="brand-reveal__secondary" onClick={() => scrollToSection('prix')}>Voir l’accompagnement</button>
           </div>
         </div>
       </div>

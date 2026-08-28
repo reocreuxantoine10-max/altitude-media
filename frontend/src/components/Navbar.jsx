@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import Logo from './Logo';
+import { scrollToSection } from '../utils/scrollToSection';
 
 const links = [
   { label: 'Plaques NFC', target: 'nfc' },
@@ -16,7 +17,7 @@ const Navbar = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-  const go = (target) => { setOpen(false); document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' }); };
+  const go = (target) => { setOpen(false); scrollToSection(target); };
   return (
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <nav aria-label="Navigation principale">
